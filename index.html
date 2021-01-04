@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuacast</title>
     
+    <!-- Kebutuhan Three.JS  -->
+    <script type="text/javascript" charset="UTF-8" src="../three/three.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../three/controls/TrackballControls.js"></script>
+    <script type="text/javascript" src="../util/Stats.js"></script>
+    <script type="text/javascript" src="../util/dat.gui.js"></script>
+
+    <script type="text/javascript" src="../util.js"></script>
+    
+
+    <!-- Kebutuhan API -->
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="script.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
@@ -25,11 +35,15 @@
 
     </div>
 
-    <div class="canvasTHREE">
-
-
-
-    </div>
+    <div id="webgl-output">
+        <!-- Semua yang ada urusannya sama threejs disini -->
+        <script type="text/javascript">
+            (function () {
+                // your page initialization code here
+                // the DOM will be available here
+                init()
+            })();
+        </script>
 
     <div class="weather-stats-bawah">
         <!-- pressure,sea_level,grnd_level,humidity -->
