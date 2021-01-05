@@ -6,7 +6,7 @@ $(document).ready(function(){
 });
 
 var fullURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' //+city
-let appid = '&appid=36369af9d5acd7def902ad1bc5f5c968';
+let appid = '&units=metric&appid=36369af9d5acd7def902ad1bc5f5c968';
 let userInput;
 
 function setup() {
@@ -49,18 +49,18 @@ function setup() {
 
 
         // Append data ke HTML Element (Stat Weather Atas)
-        $('.Temp').append("Suhu: " + temp);
-        $('.Feels_like').append("Terasa Seperti: " + feels_like);
-        $('.Temp_min').append("Suhu Minimum: " + temp_min);
-        $('.Temp_max').append("Suhu Maksimum: " + temp_max);
+        $('.Temp').append("Suhu: " + temp + " °C");
+        $('.Feels_like').append("Terasa Seperti: " + feels_like + " °C");
+        $('.Temp_min').append("Suhu Minimum: " + temp_min + " °C");
+        $('.Temp_max').append("Suhu Maksimum: " + temp_max + " °C");
         $('.City').append(city);
         $('.Date').append(date);
 
         // Append data ke HTML Element (Stat Weather Bawah)
-        $('.Pressure').append("Tekanan Udara: " + pressure);
-        $('.Sea_level').append("Permukaan Laut: "+ sea_level);
-        $('.Humidity').append("Kelembapan: " + humidity);
-        $('.Visibility').append("Visibilitas: " + visibility);
+        $('.Pressure').append("Tekanan Udara: " + pressure +" hPa");
+        $('.Sea_level').append("Tekanan Udara di Permukaan Laut: "+ sea_level + " hPa");
+        $('.Humidity').append("Kelembapan: " + humidity + " %");
+        $('.Visibility').append("Visibilitas: " + visibility + " m");
       
         console.log(weather);
 
