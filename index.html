@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuacast</title>
-    
+
+    <link rel="stylesheet" href="style.css">
     <!-- Kebutuhan Three.JS  -->
     <script type="text/javascript" charset="UTF-8" src="../three/three.js"></script>
     <script type="text/javascript" charset="UTF-8" src="../three/controls/TrackballControls.js"></script>
@@ -18,34 +19,24 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="script.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-        }
-    
-        canvas {
-            display: block;
-            margin: auto;
-            width: 50%;
-            border: 3px solid green;
-            padding: 10px;
-        }
-        #defaultCanvas0{
-            display: none;
-        }
-      </style>
 </head>
 
 <body>
     <div class="searchbar">
         <p>
-            Enter a city <input id="userinput"/>
-            <button id="searchButton">Search</button>
+            Masukkan Kota: <input id="userinput"/>
+            <button id="searchButton">Cari</button>
         </p>
     
     </div>
     <div class="weather-stats-atas">
         <!-- temp,feels_like,temp_min,temp_max,kota,tanggal -->
+        <h3 class="Temp"></h3>
+        <h3 class="Feels_like"></h3>
+        <h3 class="Temp_min"></h3>
+        <h3 class="Temp_max"></h3>
+        <h3 class="City"></h3>
+        <h3 class="Date"></h3>
 
 
     </div>
@@ -63,6 +54,12 @@
 
     <div class="weather-stats-bawah">
         <!-- pressure,sea_level,grnd_level,humidity -->
+        <h3 class="Pressure"></h3>
+        <h3 class="Sea_level"></h3>
+        <h3 class="Humidity"></h3>
+        <h3 class="Visibility"></h3>
+        
+
 
 
     </div>
