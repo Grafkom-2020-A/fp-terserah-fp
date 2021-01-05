@@ -29,11 +29,14 @@ function initRenderer(additionalProperties) {
     renderer.shadowMapSoft = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
+    var output = document.getElementById("webgl-output")
     renderer.setClearColor(new THREE.Color(0x000000));
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(window.innerWidth*0.8, window.innerHeight/1.4);
     renderer.shadowMap.enabled = true;
-    document.getElementById("webgl-output").appendChild(renderer.domElement);
-
+    if(document.getElementsByTagName("canvas")){
+        output.removeChild(output.lastChild);
+    }
+        output.appendChild(renderer.domElement);
     return renderer;
 }
 
