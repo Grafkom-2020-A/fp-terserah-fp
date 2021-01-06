@@ -1,20 +1,62 @@
-body {
-    margin: 0;
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: black;
 }
 
-h1,h2,h3,h4,h5,h6,p{
-    color: white;
+body {
+    position: flex;
+    margin: 0;
+    /* overflow: hidden; */
 }
 
 canvas {
-
     display: block;
     margin: auto;
     width: 50%;
     /* border: 3px solid green; */
     padding: 10px;
 }
-#defaultCanvas0{
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    color: white;
+}
+
+#defaultCanvas0 {
     display: none;
 }
+
+.City {
+    font-size: 100px;
+}
+
+.Temp {
+    font-size: 50px;
+    margin-top: 45px;
+}
+
+.Temp_min,
+.Temp_max {
+    font-size: 20px;
+}
+
+
+/* .Pressure,
+.Visibility,
+.Humidity,
+.Temp_min {
+    border-left: 1px solid #000000;
+}
+
+.border_left {
+    border-left: 2px solid #000000;
+}
+
+.border_bottom {
+    border-bottom: 5px double #ddd;
+} */
