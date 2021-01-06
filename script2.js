@@ -152,10 +152,26 @@ function init(data) {
         var range = 40;
         for (var i = 0; i < 1500; i++) {
             var particle = new THREE.Vector3(
-                Math.random() * range - range / 2,
+                2 + Math.random() * range - range / 2,
                 0.3 * range * 1.5,
                 // Math.random() * range - range / 2
                 -7 + (i / 100)
+            )
+            particle.velocityY = 0.1 + Math.random() / 5;
+            particle.velocityX = 0;
+            geom.vertices.push(particle);
+            geom.colors.push(
+                new THREE.Color(Math.random() * 0xffffff)
+            );
+        }
+
+        var range = 20;
+        for (var i = 0; i < 1500; i++) {
+            var particle = new THREE.Vector3(
+                9 + Math.random() * range - range / 2,
+                0.3 * range * 1.5,
+                // Math.random() * range - range / 2
+                -19 + (i / 100)
             )
             particle.velocityY = 0.1 + Math.random() / 5;
             particle.velocityX = 0;
