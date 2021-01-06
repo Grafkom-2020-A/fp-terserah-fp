@@ -48,6 +48,19 @@ function init(data) {
   var city = data.city.name;
   var date = data.list[0].dt_txt;
 
+  $('.Temp').empty();
+  $('.Feels_like').empty();
+  $('.Temp_min').empty();
+  $('.Temp_max').empty();
+  $('.City').empty();
+  $('.Date').empty();
+
+  // Append data ke HTML Element (Stat Weather Bawah)
+  $('.Pressure').empty();
+  $('.Sea_level').empty();
+  $('.Humidity').empty();
+  $('.Visibility').empty();
+
 
   // Append data ke HTML Element (Stat Weather Atas)
   $('.Temp').append("Suhu: " + temp + " °C");
