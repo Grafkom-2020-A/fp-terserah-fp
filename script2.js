@@ -132,7 +132,7 @@ function init(data) {
     light.position.set(0,300,500);
     // scene.add(light);
     light2 = new THREE.PointLight(0xc4c4c4,10);
-    light2.position.set(500,100,0);
+    light2.position.set(300,100,0);
     scene.add(light2);
     light3 = new THREE.PointLight(0xc4c4c4,10);
     light3.position.set(0,100,-500);
@@ -174,6 +174,22 @@ function init(data) {
         new THREE.Color(Math.random() * 0xffffff)
       );
     }
+
+    // another weather preparation
+    // for (var i = 0; i < 1500; i++) {
+    //   var particle = new THREE.Vector3(
+    //     Math.random() * range - range / 2,
+    //     0.3 * range * 1.5,
+    //     // Math.random() * range - range / 2
+    //     -7 + (i / 100)
+    //   )
+    //   particle.velocityY = 0.1 + Math.random() / 5;
+    //   particle.velocityX = 0;
+    //   geom.vertices.push(particle);
+    //   geom.colors.push(
+    //     new THREE.Color(Math.random() * 0xffffff)
+    //   );
+    // }
 
     cloud = new THREE.Points(geom, material);
     cloud.sortParticles = true;
