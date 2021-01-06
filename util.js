@@ -137,7 +137,6 @@ function initOrbitControls(camera,renderer){
     orbitControls.rotateSpeed = 0.8;
     orbitControls.zoomSpeed = 1.2;
     orbitControls.panSpeed = 0.8;
-    orbitControls.object = camera;
     return orbitControls;
 }
 
