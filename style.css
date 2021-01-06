@@ -6,7 +6,7 @@
 body {
     position: flex;
     margin: 0;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 canvas {
@@ -40,7 +40,24 @@ p {
     margin-top: 45px;
 }
 
+.Pressure,
+.Humidity,
+.Visibility {
+    font-size: 25px;
+}
+
 .Temp_min,
 .Temp_max {
-    font-size: 20px;
+    font-size: 15px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    padding: 20px;
+}
+
+.footer_group {
+    border-top: 1px solid #ddd;
 }
