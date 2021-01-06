@@ -1,12 +1,18 @@
 body {
     margin: 0;
+    background-color: black;
+}
+
+h1,h2,h3,h4,h5,h6,p{
+    color: white;
 }
 
 canvas {
+
     display: block;
     margin: auto;
     width: 50%;
-    border: 3px solid green;
+    /* border: 3px solid green; */
     padding: 10px;
 }
 #defaultCanvas0{
