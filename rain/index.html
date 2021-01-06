@@ -1,0 +1,38 @@
+<html>
+<style>
+    * {
+	margin: 0;
+	padding: 0;
+    }
+
+/* .numParticles {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	color: white;
+	text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+} */
+</style>
+<head>
+    <title>Basic Shader Particles</title>
+    <script type="text/javascript" src="../three/THREE-r60.min.js"></script>
+
+	<!-- ShaderParticles -->
+	<script type="text/javascript" src="../three/ShaderParticles.js"></script>
+    <script type="text/javascript" src="cloud.js"></script>
+
+</head>
+<body>
+	<script type="text/javascript">
+		(function () {
+                // your page initialization code here
+                // the DOM will be available here
+                init();
+                initParticles();
+                setTimeout(animate, 0);
+        })();
+    
+	</script>
+
+</body>
+</html>
