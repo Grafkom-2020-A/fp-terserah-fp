@@ -134,7 +134,10 @@ function initTrackballControls(camera, renderer) {
 
 function initOrbitControls(camera,renderer){
     var orbitControls = new THREE.OrbitControls(camera,renderer.domElement);
-    orbitControls.autoRotate = true;
+    orbitControls.rotateSpeed = 0.8;
+    orbitControls.zoomSpeed = 1.2;
+    orbitControls.panSpeed = 0.8;
+    orbitControls.object = camera;
     return orbitControls;
 }
 
