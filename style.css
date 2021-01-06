@@ -44,19 +44,3 @@ p {
 .Temp_max {
     font-size: 20px;
 }
-
-
-/* .Pressure,
-.Visibility,
-.Humidity,
-.Temp_min {
-    border-left: 1px solid #000000;
-}
-
-.border_left {
-    border-left: 2px solid #000000;
-}
-
-.border_bottom {
-    border-bottom: 5px double #ddd;
-} */
