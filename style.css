@@ -6,7 +6,7 @@
 body {
     position: flex;
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 canvas {
@@ -53,7 +53,8 @@ p {
 
 .footer {
     position: absolute;
-    bottom: 0px;
+    bottom: -100px;
+    /* aslinya 0 aku coba ngeluasin kanvas */
     width: 100%;
     padding: 20px;
 }
