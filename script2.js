@@ -84,6 +84,7 @@ function init(data) {
 
   // var stats = initStats();
   var renderer = initRenderer();
+  renderer.physicallyCorrectLights = true;
   var camera = initCamera(new THREE.Vector3(0, 0, 100));
   var trackballControls = initTrackballControls(camera, renderer);
   var clock = new THREE.Clock();
