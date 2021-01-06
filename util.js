@@ -31,7 +31,7 @@ function initRenderer(additionalProperties) {
 
     var output = document.getElementById("webgl-output")
     renderer.setClearColor(new THREE.Color(0x000000));
-    renderer.setSize(window.innerWidth*0.8, window.innerHeight/1.4);
+    renderer.setSize(window.innerWidth*0.98, window.innerHeight/1.6);
     renderer.shadowMap.enabled = true;
     if(document.getElementsByTagName("canvas")){
         output.removeChild(output.lastChild);
