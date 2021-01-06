@@ -8,7 +8,3 @@ GitHub Repository of Final Project: Cuacast
 * 05111840000098 - [Patrick Cipta Winata](https://github.com/patrick-cw)
 * 05111840000116 - [Clever Dicki Marpaung](https://github.com/cleverdicki)
 * 05111840000162 - [Fransiskus Xaverius Kevin Koesnadi](https://github.com/fxkevink)
-
-## Proposal
-
-[Tautan Proposal](https://github.com/Grafkom-2020-A/fp-terserah-fp/blob/main/Proposal/Proposal_Terserah_Grafkom-A.pdf)
