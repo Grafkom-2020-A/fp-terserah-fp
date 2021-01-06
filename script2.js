@@ -74,7 +74,8 @@ function init(data) {
     var renderer = initRenderer();
     renderer.physicallyCorrectLights = true;
     var camera = initCamera(new THREE.Vector3(0, 0, 100));
-    var trackballControls = initTrackballControls(camera, renderer);
+    // var trackballControls = initTrackballControls(camera, renderer);
+    var orbitControls = initOrbitControls(camera, renderer);
     var clock = new THREE.Clock();
     var scene = new THREE.Scene();
 
@@ -180,7 +181,8 @@ function init(data) {
     function render() {
 
         // stats.update();
-        trackballControls.update(clock.getDelta());
+        orbitControls.update(clock.getDelta());
+        // trackballControls.update(clock.getDelta());
         var vertices = cloud.geometry.vertices;
         vertices.forEach(function(v) {
             v.y = v.y - (v.velocityY);
