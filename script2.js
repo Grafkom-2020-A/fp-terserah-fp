@@ -24,17 +24,34 @@ function setup() {
         var url = curweatherURL + term + id;
         window.value = url;
         loadJSON(url, init, 'json');
+        // loadJSON(url, init, 'json');
         console.log(url);
 
     }
 }
 
+function clearstat () {
+    $('.Temp').empty();
+    $('.Feels_like').empty();
+    $('.Temp_min').empty();
+    $('.Temp_max').empty();
+    $('.City').empty();
+    $('.Date').empty();
+
+    // Append data ke HTML Element (Stat Weather Bawah)
+    $('.Pressure').empty();
+    $('.Humidity').empty();
+    $('.Visibility').empty();
+    $('.Weather').empty();
+}
 
 
 function init(data) {
     //Process Api disini
     console.log(data);
+    clearstat();
 
+    //Assign Data dari Current weather API ke variable
     var temp = data.main.temp;
     var feels_like = data.main.feels_like;
     var temp_min = data.main.temp_min;
