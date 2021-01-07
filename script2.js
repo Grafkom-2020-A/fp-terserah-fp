@@ -6,7 +6,8 @@ $(document).ready(function() {
     });
 });
 
-var fullURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' //+city
+var curweatherURL= 'http://api.openweathermap.org/data/2.5/weather?q='; 
+var forecastURL = 'http://api.openweathermap.org/data/2.5/forecast?q='; //+city
 let appid = '&units=metric&appid=36369af9d5acd7def902ad1bc5f5c968';
 let userInput;
 
@@ -17,11 +18,10 @@ function setup() {
 
     function searchbycity() {
         let term = userInput.value();
-        var url = fullURL;
         var id = appid;
 
         // Load JSON data
-        var url = fullURL + term + id;
+        var url = curweatherURL + term + id;
         window.value = url;
         loadJSON(url, init, 'json');
         console.log(url);
@@ -35,18 +35,30 @@ function init(data) {
     //Process Api disini
     console.log(data);
 
-    // Assign data dari API ke variabel 
-    var temp = data.list[0].main.temp;
-    var feels_like = data.list[0].main.feels_like;
-    var temp_min = data.list[0].main.temp_min;
-    var temp_max = data.list[0].main.temp_max;
-    var pressure = data.list[0].main.pressure;
-    var sea_level = data.list[0].main.sea_level;
-    var humidity = data.list[0].main.humidity;
-    var visibility = data.list[0].visibility;
-    var weather = data.list[0].weather[0].main;
-    var city = data.city.name;
-    var date = data.list[0].dt_txt;
+    var temp = data.main.temp;
+    var feels_like = data.main.feels_like;
+    var temp_min = data.main.temp_min;
+    var temp_max = data.main.temp_max;
+    var pressure = data.main.pressure;
+    var humidity = data.main.humidity;
+    var visibility = data.visibility;
+    var weather = data.weather[0].main;
+    var city = data.name;
+    var datevar = new Date();
+    var date = datevar.toLocaleString();
+
+    // // Assign data dari API ke variabel (forecast) 
+    // var temp = data.list[0].main.temp;
+    // var feels_like = data.list[0].main.feels_like;
+    // var temp_min = data.list[0].main.temp_min;
+    // var temp_max = data.list[0].main.temp_max;
+    // var pressure = data.list[0].main.pressure;
+    // var sea_level = data.list[0].main.sea_level;
+    // var humidity = data.list[0].main.humidity;
+    // var visibility = data.list[0].visibility;
+    // var weather = data.list[0].weather[0].main;
+    // var city = data.city.name;
+    // var date = data.list[0].dt_txt;
 
 
     // Append data ke HTML Element (Stat Weather Atas)
@@ -59,7 +71,6 @@ function init(data) {
 
     // Append data ke HTML Element (Stat Weather Bawah)
     $('.Pressure').append("Tekanan Udara: " + pressure + " hPa");
-    $('.Sea_level').append("Tekanan Udara di Permukaan Laut: " + sea_level + " hPa");
     $('.Humidity').append("Kelembapan: " + humidity + "%");
     $('.Visibility').append("Visibilitas: " + visibility + " m");
     $('.Weather').append(weather);
