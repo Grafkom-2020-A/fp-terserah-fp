@@ -10,6 +10,7 @@ var curweatherURL= 'http://api.openweathermap.org/data/2.5/weather?q=';
 var forecastURL = 'http://api.openweathermap.org/data/2.5/forecast?q='; //+city
 let appid = '&units=metric&appid=36369af9d5acd7def902ad1bc5f5c968';
 let userInput;
+let url;
 
 function setup() {
     userInput = select('#userInput');
@@ -21,13 +22,29 @@ function setup() {
         var id = appid;
 
         // Load JSON data
-        var url = curweatherURL + term + id;
+        url = curweatherURL + term + id;
         window.value = url;
         loadJSON(url, init, 'json');
         // loadJSON(url, init, 'json');
         console.log(url);
 
+        nextbutton = select('#nextButton');
+        nextbutton.mousePressed(forecastWeather);
+
     }
+}
+
+function forecastWeather () {
+    userInput = select('#userInput');
+    let term = userInput.value();
+    var id = appid;
+    // Load JSON data
+    url = forecastURL + term + id;
+    window.value = url;
+    loadJSON(url, init, 'json');
+    // loadJSON(url, init, 'json');
+    console.log(url);
+
 }
 
 function clearstat () {
@@ -48,21 +65,57 @@ function clearstat () {
 
 function init(data) {
     //Process Api disini
-    console.log(data);
+    console.log(url);
     clearstat();
 
-    //Assign Data dari Current weather API ke variable
-    var temp = data.main.temp;
-    var feels_like = data.main.feels_like;
-    var temp_min = data.main.temp_min;
-    var temp_max = data.main.temp_max;
-    var pressure = data.main.pressure;
-    var humidity = data.main.humidity;
-    var visibility = data.visibility;
-    var weather = data.weather[0].main;
-    var city = data.name;
-    var datevar = new Date();
-    var date = datevar.toLocaleString();
+    var temp;
+    var feels_like;
+    var temp_min;
+    var temp_max;
+    var pressure;
+    var humidity;
+    var visibility;
+    var weather;
+    var city;
+    var date;
+
+    function isForecast(str2) {
+        var str1 = forecastURL; //Length of str1 is 30
+        var n = str2.indexOf(str1);
+        console.log(n);
+        return n;
+      }
+
+    if (isForecast(url) != -1)
+    {
+        // Assign data dari API ke variabel (forecast) 
+        temp = data.list[0].main.temp;
+        feels_like = data.list[0].main.feels_like;
+        temp_min = data.list[0].main.temp_min;
+        temp_max = data.list[0].main.temp_max;
+        pressure = data.list[0].main.pressure;
+        humidity = data.list[0].main.humidity;
+        visibility = data.list[0].visibility;
+        weather = data.list[0].weather[0].main;
+        city = data.city.name;
+        date = data.list[0].dt_txt
+    }
+    else {
+
+        //Assign Data dari Current weather API ke variable
+        temp = data.main.temp;
+        feels_like = data.main.feels_like;
+        temp_min = data.main.temp_min;
+        temp_max = data.main.temp_max;
+        pressure = data.main.pressure;
+        humidity = data.main.humidity;
+        visibility = data.visibility;
+        weather = data.weather[0].main;
+        city = data.name;
+        datevar = new Date();
+        date = datevar.toLocaleString();
+    }
+
 
     // // Assign data dari API ke variabel (forecast) 
     // var temp = data.list[0].main.temp;
