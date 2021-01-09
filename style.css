@@ -17,6 +17,11 @@ canvas {
     padding: 10px;
 }
 
+img {
+    max-width: 50%;
+    height: auto;
+}
+
 h1,
 h2,
 h3,
@@ -61,4 +66,8 @@ p {
 
 .footer_group {
     border-top: 1px solid #ddd;
+}
+
+.btn_next {
+    margin-bottom: 10px;
 }
