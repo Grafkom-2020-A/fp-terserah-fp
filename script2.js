@@ -6,7 +6,7 @@ $(document).ready(function() {
     });
 });
 
-var curweatherURL= 'http://api.openweathermap.org/data/2.5/weather?q='; 
+var curweatherURL = 'http://api.openweathermap.org/data/2.5/weather?q=';
 var forecastURL = 'http://api.openweathermap.org/data/2.5/forecast?q='; //+city
 let appid = '&units=metric&appid=36369af9d5acd7def902ad1bc5f5c968';
 let userInput;
@@ -34,7 +34,7 @@ function setup() {
     }
 }
 
-function forecastWeather () {
+function forecastWeather() {
     userInput = select('#userInput');
     let term = userInput.value();
     var id = appid;
@@ -47,7 +47,7 @@ function forecastWeather () {
 
 }
 
-function clearstat () {
+function clearstat() {
     $('.Temp').empty();
     $('.Feels_like').empty();
     $('.Temp_min').empty();
@@ -84,10 +84,9 @@ function init(data) {
         var n = str2.indexOf(str1);
         console.log(n);
         return n;
-      }
+    }
 
-    if (isForecast(url) != -1)
-    {
+    if (isForecast(url) != -1) {
         // Assign data dari API ke variabel (forecast) 
         temp = data.list[0].main.temp;
         feels_like = data.list[0].main.feels_like;
@@ -98,9 +97,8 @@ function init(data) {
         visibility = data.list[0].visibility;
         weather = data.list[0].weather[0].main;
         city = data.city.name;
-        date = data.list[0].dt_txt
-    }
-    else {
+        date = data.list[0].dt_txt;
+    } else {
 
         //Assign Data dari Current weather API ke variable
         temp = data.main.temp;
@@ -215,51 +213,63 @@ function init(data) {
         var loader = new THREE.GLTFLoader();
         loader.load('../gLTF/scene.gltf', function(result) {
             // correctly position the scene
-            result.scene.position.set(0, -50, 0)
+            result.scene.position.set(0, -50, 0);
             result.scene.scale.set(0.05, 0.05, 0.05);
-            scene.add(result.scene)
+            scene.add(result.scene);
         });
 
         // initDefaultLighting(scene);
-        var loader = new THREE.GLTFLoader();
-        loader.load('../gLTF/clouds.gltf', function(result) {
-            // correctly position the scene
-            result.scene.position.set(-5, 20, 0)
+        var loader1 = new THREE.GLTFLoader();
+        if (weather == 'Sun') {
+            loader1.load('../gLTF/sun.gltf', function(result) {
+                // correctly position the scene
+                result.scene.position.set(-5, 20, 0);
                 // result.scene.scale.set(10, 10, 10);
-            result.scene.scale.set(4, 4, 4);
-            scene.add(result.scene)
-        });
+                result.scene.scale.set(4, 4, 4);
+                scene.add(result.scene);
+            });
 
-        var range = 40;
-        for (var i = 0; i < 1500; i++) {
-            var particle = new THREE.Vector3(
-                2 + Math.random() * range - range / 2,
-                0.3 * range * 1.5,
-                // Math.random() * range - range / 2
-                -7 + (i / 100)
-            )
-            particle.velocityY = 0.1 + Math.random() / 5;
-            particle.velocityX = 0;
-            geom.vertices.push(particle);
-            geom.colors.push(
-                new THREE.Color(Math.random() * 0xffffff)
-            );
-        }
+        } else if (weather == 'Rain') {
 
-        var range = 20;
-        for (var i = 0; i < 1500; i++) {
-            var particle = new THREE.Vector3(
-                9 + Math.random() * range - range / 2,
-                0.3 * range * 1.5,
-                // Math.random() * range - range / 2
-                -19 + (i / 100)
-            )
-            particle.velocityY = 0.1 + Math.random() / 5;
-            particle.velocityX = 0;
-            geom.vertices.push(particle);
-            geom.colors.push(
-                new THREE.Color(Math.random() * 0xffffff)
-            );
+            loader1.load('../gLTF/clouds.gltf', function(result) {
+                // correctly position the scene
+                result.scene.position.set(-5, 20, 0);
+                // result.scene.scale.set(10, 10, 10);
+                result.scene.scale.set(4, 4, 4);
+                scene.add(result.scene);
+            });
+
+            var range = 40;
+            for (var i = 0; i < 1500; i++) {
+                var particle = new THREE.Vector3(
+                    2 + Math.random() * range - range / 2,
+                    0.3 * range * 1.5,
+                    // Math.random() * range - range / 2
+                    -7 + (i / 100)
+                )
+                particle.velocityY = 0.1 + Math.random() / 5;
+                particle.velocityX = 0;
+                geom.vertices.push(particle);
+                geom.colors.push(
+                    new THREE.Color(Math.random() * 0xffffff)
+                );
+            }
+
+            var range = 20;
+            for (var i = 0; i < 1500; i++) {
+                var particle = new THREE.Vector3(
+                    9 + Math.random() * range - range / 2,
+                    0.3 * range * 1.5,
+                    // Math.random() * range - range / 2
+                    -19 + (i / 100)
+                )
+                particle.velocityY = 0.1 + Math.random() / 5;
+                particle.velocityX = 0;
+                geom.vertices.push(particle);
+                geom.colors.push(
+                    new THREE.Color(Math.random() * 0xffffff)
+                );
+            }
         }
 
         cloud = new THREE.Points(geom, material);
@@ -272,7 +282,6 @@ function init(data) {
 
         scene.add(cloud);
         // scene.add(snow);
-
     }
 
     function render() {
