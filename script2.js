@@ -152,6 +152,8 @@ function init(data) {
     // var stats = initStats();
     var renderer = initRenderer();
     renderer.physicallyCorrectLights = true;
+    renderer.gammaOutput = true;
+    renderer.gammaFactor = 2.2;
     var camera = initCamera(new THREE.Vector3(0, 0, 100));
     // var trackballControls = initTrackballControls(camera, renderer);
     var orbitControls = initOrbitControls(camera, renderer);
@@ -191,30 +193,72 @@ function init(data) {
             color: color
         });
 
-        hlight = new THREE.AmbientLight(0x404040, 100);
-        // scene.add(hlight);
-        directionalLight = new THREE.DirectionalLight(0xffffff, 100);
-        directionalLight.position.set(0, 1, 0);
-        directionalLight.castShadow = true;
-        // scene.add(directionalLight);
-        light = new THREE.PointLight(0xc4c4c4, 10);
-        light.position.set(0, 300, 500);
-        // scene.add(light);
+        // hlight = new THREE.AmbientLight(0x404040, 100);
+        // // scene.add(hlight);
+        // directionalLight = new THREE.DirectionalLight(0xffffff, 100);
+        // directionalLight.position.set(0, 1, 0);
+        // directionalLight.castShadow = true;
+        // // scene.add(directionalLight);
+        // light = new THREE.PointLight(0xc4c4c4, 10);
+        // light.position.set(0, 300, 500);
+        // // scene.add(light);
         light2 = new THREE.PointLight(0xc4c4c4, 10);
         light2.position.set(500, 100, 0);
+        light2.intensity = 0.5;
         scene.add(light2);
-        light3 = new THREE.PointLight(0xc4c4c4, 10);
-        light3.position.set(0, 100, -500);
-        // scene.add(light3);
+        // light3 = new THREE.PointLight(0xc4c4c4, 10);
+        // light3.position.set(0, 100, -500);
+        // // scene.add(light3);
         light4 = new THREE.PointLight(0xc4c4c4, 10);
         light4.position.set(-500, 300, 500);
+        light4.intensity = 0.5;
         scene.add(light4);
 
+        var ambientLight = new THREE.AmbientLight("#111111");
+        scene.add(ambientLight);
+      
+        // the point light where working with
+        var pointColor = "#ccffcc";
+        var pointLight = new THREE.PointLight(pointColor);
+        pointLight.position.set(-5, 35, 0);
+        pointLight.intensity = 5;
+        pointLight.decay = 2;
+      
+        pointLight.castShadow = true;
+      
+        scene.add(pointLight);
+      
+        var helper = new THREE.PointLightHelper(pointLight);
+        scene.add(helper);
+      
+        var shadowHelper = new THREE.CameraHelper(pointLight.shadow.camera)
+        scene.add(shadowHelper);
+
+        var helper = new THREE.PointLightHelper(light4);
+        scene.add(helper);
+      
+        var shadowHelper = new THREE.CameraHelper(light4.shadow.camera)
+        scene.add(shadowHelper);
+
+        var helper = new THREE.PointLightHelper(light2);
+        scene.add(helper);
+      
+        var shadowHelper = new THREE.CameraHelper(light2.shadow.camera)
+        scene.add(shadowHelper);
+    
         var loader = new THREE.GLTFLoader();
         loader.load('../gLTF/scene.gltf', function(result) {
             // correctly position the scene
             result.scene.position.set(0, -50, 0);
             result.scene.scale.set(0.05, 0.05, 0.05);
+            scene.add(result.scene);
+        });
+
+        loader.load('../gLTF/sun.gltf', function(result) {
+            // correctly position the scene
+            result.scene.position.set(-5, 35, 0);
+            // result.scene.scale.set(10, 10, 10);
+            result.scene.scale.set(4, 4, 4);
             scene.add(result.scene);
         });
 
