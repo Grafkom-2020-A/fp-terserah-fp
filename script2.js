@@ -489,103 +489,116 @@ function init(data) {
             });
 
             var range = 40;
-            for (var i = 0; i < 200; i++) {
-                var particle = new THREE.Vector3(
-                    Math.random() * range - range / 2,
-                    0.3 * range * 1.5,
-                    //Math.random() * range - range / 2
-                    -6 + (i / 100)
-                )
-                particle.velocityY = 0.1 + Math.random() / 5;
-                particle.velocityX = (Math.random() - 0.5) / 3;
-                geom.vertices.push(particle);
-                geom.colors.push(
-                    new THREE.Color(Math.random() * 0xffffff)
-                );
+            for (var i = 0; i < 750; i++) {
+                if(i%5==0){
+                    var particle = new THREE.Vector3(
+                        Math.random() * range - range / 2,
+                        0.3 * range * 1.5,
+                        //Math.random() * range - range / 2
+                        -6 + (i / 100)
+                    )
+                    particle.velocityY = 0.1 + Math.random() / 5;
+                    particle.velocityX = (Math.random() - 0.5) / 3;
+                    geom.vertices.push(particle);
+                    geom.colors.push(
+                        new THREE.Color(Math.random() * 0xffffff)
+                    );
+                }
             }
 
             var range = 40;
-            for (var i = 0; i < 200; i++) {
-                var particle = new THREE.Vector3(
-                    7 + Math.random() * range - range / 2,
-                    0.3 * range * 1.5,
-                    // Math.random() * range - range / 2
-                    -13 + (i / 100)
-                )
-                particle.velocityY = 0.1 + Math.random() / 5;
-                particle.velocityX = (Math.random() - 0.5) / 3;
-                geom.vertices.push(particle);
-                geom.colors.push(
-                    new THREE.Color(Math.random() * 0xffffff)
-                );
+            for (var i = 0; i < 750; i++) {
+                if(i%5==0){
+                    var particle = new THREE.Vector3(
+                        7 + Math.random() * range - range / 2,
+                        0.3 * range * 1.5,
+                        // Math.random() * range - range / 2
+                        -13 + (i / 100)
+                    )
+                    particle.velocityY = 0.1 + Math.random() / 5;
+                    particle.velocityX = (Math.random() - 0.5) / 3;
+                    geom.vertices.push(particle);
+                    geom.colors.push(
+                        new THREE.Color(Math.random() * 0xffffff)
+                    );
+                }
             }
 
             var range = 40;
-            for (var i = 0; i < 200; i++) {
-                var particle = new THREE.Vector3(
-                    -17 + Math.random() * range - range / 2,
-                    0.3 * range * 1.5,
-                    // Math.random() * range - range / 2
-                    -6 + (i / 100)
-                )
-                particle.velocityY = 0.1 + Math.random() / 5;
-                particle.velocityX = (Math.random() - 0.5) / 3;
-                geom.vertices.push(particle);
-                geom.colors.push(
-                    new THREE.Color(Math.random() * 0xffffff)
-                );
+            for (var i = 0; i < 750; i++) {
+                if(i%5==0){
+                    var particle = new THREE.Vector3(
+                        -17 + Math.random() * range - range / 2,
+                        0.3 * range * 1.5,
+                        // Math.random() * range - range / 2
+                        -6 + (i / 100)
+                    )
+                    particle.velocityY = 0.1 + Math.random() / 5;
+                    particle.velocityX = (Math.random() - 0.5) / 3;
+                    geom.vertices.push(particle);
+                    geom.colors.push(
+                        new THREE.Color(Math.random() * 0xffffff)
+                    );
+                }
             }
 
             var range = 40;
-            for (var i = 0; i < 200; i++) {
-                var particle = new THREE.Vector3(
-                    -10 + Math.random() * range - range / 2,
-                    0.3 * range * 1.5,
-                    // Math.random() * range - range / 2
-                    -13 + (i / 100)
-                )
-                particle.velocityY = 0.1 + Math.random() / 5;
-                particle.velocityX = (Math.random() - 0.5) / 3;
-                geom.vertices.push(particle);
-                geom.colors.push(
-                    new THREE.Color(Math.random() * 0xffffff)
-                );
+            for (var i = 0; i < 750; i++) {
+                if(i%5==0){
+                    
+                    var particle = new THREE.Vector3(
+                        -10 + Math.random() * range - range / 2,
+                        0.3 * range * 1.5,
+                        // Math.random() * range - range / 2
+                        -13 + (i / 100)
+                    )
+                    particle.velocityY = 0.1 + Math.random() / 5;
+                    particle.velocityX = (Math.random() - 0.5) / 3;
+                    geom.vertices.push(particle);
+                    geom.colors.push(
+                        new THREE.Color(Math.random() * 0xffffff)
+                    );
+                }
             }
 
             var range = 40;
-            for (var i = 0; i < 200; i++) {
-                var particle = new THREE.Vector3(
-                    21 + Math.random() * range - range / 2,
-                    0.3 * range * 1.5,
-                    // Math.random() * range - range / 4
-                    -6 + (i / 100)
-                )
-                particle.velocityY = 0.1 + Math.random() / 5;
-                particle.velocityX = (Math.random() - 0.5) / 3;
-                geom.vertices.push(particle);
-                geom.colors.push(
-                    new THREE.Color(Math.random() * 0xffffff)
-                );
+            for (var i = 0; i < 750; i++) {
+                if(i%5==0){
+                    var particle = new THREE.Vector3(
+                        21 + Math.random() * range - range / 2,
+                        0.3 * range * 1.5,
+                        // Math.random() * range - range / 4
+                        -6 + (i / 100)
+                    )
+                    particle.velocityY = 0.1 + Math.random() / 5;
+                    particle.velocityX = (Math.random() - 0.5) / 3;
+                    geom.vertices.push(particle);
+                    geom.colors.push(
+                        new THREE.Color(Math.random() * 0xffffff)
+                    );
+                }
             }
 
             var range = 40;
-            for (var i = 0; i < 200; i++) {
-                var particle = new THREE.Vector3(
-                    28 + Math.random() * range - range / 2,
-                    0.3 * range * 1.5,
-                    // Math.random() * range - range / 4
-                    -13 + (i / 100)
-                )
-                particle.velocityY = 0.1 + Math.random() / 5;
-                particle.velocityX = (Math.random() - 0.5) / 3;
-                geom.vertices.push(particle);
-                geom.colors.push(
-                    new THREE.Color(Math.random() * 0xffffff)
-                );
+            for (var i = 0; i < 750; i++) {
+                if(i%5==0){
+                    var particle = new THREE.Vector3(
+                        28 + Math.random() * range - range / 2,
+                        0.3 * range * 1.5,
+                        // Math.random() * range - range / 4
+                        -13 + (i / 100)
+                    )
+                    particle.velocityY = 0.1 + Math.random() / 5;
+                    particle.velocityX = (Math.random() - 0.5) / 3;
+                    geom.vertices.push(particle);
+                    geom.colors.push(
+                        new THREE.Color(Math.random() * 0xffffff)
+                    );
+                }
             }
             cloud = new THREE.Points(geom, material2);
             cloud.sortParticles = true;
-            cloud.name = "particles1"
+            cloud.name = "particles2"
 
             scene.add(cloud);
         }
