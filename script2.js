@@ -11,12 +11,18 @@ var forecastURL = 'http://api.openweathermap.org/data/2.5/forecast?q='; //+city
 let appid = '&units=metric&appid=36369af9d5acd7def902ad1bc5f5c968';
 let userInput;
 let url;
-let iterator=0;
+let iterator= -1;
 
 function setup() {
     userInput = select('#userInput');
     searchbutton = select('#searchButton');
     searchbutton.mousePressed(searchbycity);
+
+    nextbutton = select('#nextButton');
+    nextbutton.mousePressed(forecastWeatherNext);
+
+    nextbutton = select('#beforeButton');
+    nextbutton.mousePressed(forecastWeatherBefore);
 
     function searchbycity() {
         let term = userInput.value();
@@ -29,13 +35,12 @@ function setup() {
         // loadJSON(url, init, 'json');
         console.log(url);
 
-        nextbutton = select('#nextButton');
-        nextbutton.mousePressed(forecastWeather);
+        
 
     }
 }
 
-function forecastWeather() {
+function forecastWeatherNext() {
     userInput = select('#userInput');
     let term = userInput.value();
     var id = appid;
@@ -45,6 +50,25 @@ function forecastWeather() {
     loadJSON(url, init, 'json');
     // loadJSON(url, init, 'json');
     console.log(url);
+    iterator += 1;
+
+}
+
+function forecastWeatherBefore() {
+    
+    if (iterator > 0) {
+        userInput = select('#userInput');
+        let term = userInput.value();
+        var id = appid;
+        // Load JSON data
+        url = forecastURL + term + id;
+        window.value = url;
+        loadJSON(url, init, 'json');
+        // loadJSON(url, init, 'json');
+        console.log(url);
+        iterator -= 1;
+    }
+
 
 }
 
@@ -99,7 +123,7 @@ function init(data) {
         weather = data.list[iterator].weather[0].main;
         city = data.city.name;
         date = data.list[iterator].dt_txt;
-        iterator = iterator + 1;
+        
     } else {
 
         //Assign Data dari Current weather API ke variable
