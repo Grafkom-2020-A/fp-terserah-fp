@@ -173,7 +173,7 @@ function init(data) {
     $('.Pressure').append("Tekanan Udara: " + pressure + " hPa");
     $('.Humidity').append("Kelembapan: " + humidity + "%");
     $('.Visibility').append("Visibilitas: " + visibility + " m");
-    $('.Weather').append(weather);
+    // $('.Weather').append(weather);
 
     console.log(weather);
 
@@ -249,6 +249,7 @@ function init(data) {
         // initDefaultLighting(scene);
         var loader1 = new THREE.GLTFLoader();
         if (weather == 'Clouds') {
+            $('.Weather').append("Berawan");
             light2 = new THREE.PointLight(0xc4c4c4, 10);
             light2.position.set(500, 100, 0);
             light2.castShadow = true;
@@ -289,7 +290,7 @@ function init(data) {
                 scene.add(result.scene);
             });
         } else if (weather == 'Rain' || weather == 'Drizzle' || weather == 'Thunderstorm' ) {
-
+            $('.Weather').append("Hujan");
             light2 = new THREE.PointLight(0xc4c4c4, 10);
             light2.position.set(500, 100, 0);
             light2.castShadow = true;
@@ -432,6 +433,7 @@ function init(data) {
             scene.add(cloud);
 
         } else if (weather == 'Snow'){
+            $('.Weather').append("Salju");
             light2 = new THREE.PointLight(0xc4c4c4, 10);
             light2.position.set(500, 100, 0);
             light2.castShadow = true;
@@ -586,6 +588,7 @@ function init(data) {
 
             scene.add(cloud);
         } else {
+            $('.Weather').append("Cerah");
 
             var pointColor = "#ccffcc";
             var pointLight = new THREE.PointLight(pointColor);
