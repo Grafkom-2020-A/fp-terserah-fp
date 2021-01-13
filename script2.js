@@ -184,8 +184,8 @@ function init(data) {
     // var stats = initStats();
     var renderer = initRenderer();
     renderer.physicallyCorrectLights = true;
-    renderer.gammaOutput = true;
-    renderer.gammaFactor = 2.2;
+    // renderer.gammaOutput = true;
+    // renderer.gammaFactor = 2.2;
     var camera = initCamera(new THREE.Vector3(0, 0, 100));
     // var trackballControls = initTrackballControls(camera, renderer);
     var orbitControls = initOrbitControls(camera, renderer);
@@ -201,7 +201,7 @@ function init(data) {
 
 
         var texture = new THREE.TextureLoader().load("../particles/raindrop-3.png");
-        var texture2 = new THREE.TextureLoader().load("../particles/snowflake3_t.png");
+        var texture2 = new THREE.TextureLoader().load("../particles/snowflake2_t.png");
 
         var geom = new THREE.Geometry();
 
@@ -214,6 +214,7 @@ function init(data) {
             sizeAttenuation: sizeAttenuation,
             color: color
         });
+        
 
         var material2 = new THREE.PointsMaterial({
             size: size + 2,
@@ -225,28 +226,7 @@ function init(data) {
             color: color
         });
 
-        // hlight = new THREE.AmbientLight(0x404040, 100);
-        // // scene.add(hlight);
-        // directionalLight = new THREE.DirectionalLight(0xffffff, 100);
-        // directionalLight.position.set(0, 1, 0);
-        // directionalLight.castShadow = true;
-        // // scene.add(directionalLight);
-        // light = new THREE.PointLight(0xc4c4c4, 10);
-        // light.position.set(0, 300, 500);
-        // // scene.add(light);
-        light2 = new THREE.PointLight(0xc4c4c4, 10);
-        light2.position.set(500, 100, 0);
-        light2.intensity = 0.5;
-        scene.add(light2);
-        // light3 = new THREE.PointLight(0xc4c4c4, 10);
-        // light3.position.set(0, 100, -500);
-        // // scene.add(light3);
-        light4 = new THREE.PointLight(0xc4c4c4, 10);
-        light4.position.set(-500, 300, 500);
-        light4.intensity = 0.5;
-        scene.add(light4);
-
-        var ambientLight = new THREE.AmbientLight("#111111");
+        var ambientLight = new THREE.AmbientLight("#ffffff");
         scene.add(ambientLight);
       
         // the point light where working with
@@ -258,13 +238,363 @@ function init(data) {
       
         pointLight.castShadow = true;
       
-        scene.add(pointLight);
+        // scene.add(pointLight);
+
+        const materialo = new THREE.MeshPhongMaterial();
       
-        var helper = new THREE.PointLightHelper(pointLight);
-        scene.add(helper);
+        var loader = new THREE.GLTFLoader();
+        loader.load('../gLTF/scene.gltf', function(result) {
+            // correctly position the scene
+            result.scene.position.set(0, -50, 0);
+            result.scene.scale.set(0.05, 0.05, 0.05);
+            scene.add(result.scene);
+        });
+
+        weather = "Snow";
+
+        // initDefaultLighting(scene);
+        var loader1 = new THREE.GLTFLoader();
+        if (weather == 'Sun') {
+            loader1.load('../gLTF/sun.gltf', function(result) {
+                // correctly position the scene
+                result.scene.position.set(-5, 35, 0);
+                //20
+                // result.scene.scale.set(10, 10, 10);
+                result.scene.scale.set(4, 4, 4);
+                scene.add(result.scene);
+            });
+        } else if (weather == 'Clouds') {
+
+            light2 = new THREE.PointLight(0xc4c4c4, 10);
+            light2.position.set(500, 100, 0);
+            light2.castShadow = true;
+            light2.intensity = 6;
+            scene.add(light2);
+            light3 = new THREE.PointLight(0xc4c4c4, 10);
+            light3.position.set(0, 100, -500);
+            light3.castShadow = true;
+            light3.intensity = 6;
+            scene.add(light3);
+            light4 = new THREE.PointLight(0xc4c4c4, 10);
+            light4.position.set(-500, 300, 500);
+            light4.castShadow = true;
+            light4.intensity = 6;
+            scene.add(light4);
+
+            loader1.load('../gLTF/clouds.gltf', function(result) {
+                // correctly position the scene
+                result.scene.position.set(-5, 20, 0);
+                // result.scene.scale.set(10, 10, 10);
+                result.scene.scale.set(4, 4, 4);
+                scene.add(result.scene);
+            });
+
+            loader1.load('../gLTF/clouds.gltf', function(result) {
+                // correctly position the scene
+                result.scene.position.set(-30, 20, 0);
+                // result.scene.scale.set(10, 10, 10);
+                result.scene.scale.set(4, 4, 4);
+                scene.add(result.scene);
+            });
+
+            loader1.load('../gLTF/clouds.gltf', function(result) {
+                // correctly position the scene
+                result.scene.position.set(20, 20, 0);
+                // result.scene.scale.set(10, 10, 10);
+                result.scene.scale.set(4, 4, 4);
+                scene.add(result.scene);
+            });
+        } else if (weather == 'Rain') {
+
+            light2 = new THREE.PointLight(0xc4c4c4, 10);
+            light2.position.set(500, 100, 0);
+            light2.castShadow = true;
+            light2.intensity = 4;
+            scene.add(light2);
+            light3 = new THREE.PointLight(0xc4c4c4, 10);
+            light3.position.set(0, 100, -500);
+            light3.castShadow = true;
+            light3.intensity = 4;
+            scene.add(light3);
+            light4 = new THREE.PointLight(0xc4c4c4, 10);
+            light4.position.set(-500, 300, 500);
+            light4.castShadow = true;
+            light4.intensity = 4;
+            scene.add(light4);
+
+            loader1.load('../gLTF/clouds.gltf', function(result) {
+                // correctly position the scene
+                result.scene.position.set(-5, 20, 0);
+                // result.scene.scale.set(10, 10, 10);
+                result.scene.scale.set(4, 4, 4);
+                scene.add(result.scene);
+            });
+
+            loader1.load('../gLTF/clouds.gltf', function(result) {
+                // correctly position the scene
+                result.scene.position.set(-30, 20, 0);
+                // result.scene.scale.set(10, 10, 10);
+                result.scene.scale.set(4, 4, 4);
+                scene.add(result.scene);
+            });
+
+            loader1.load('../gLTF/clouds.gltf', function(result) {
+                // correctly position the scene
+                result.scene.position.set(20, 20, 0);
+                // result.scene.scale.set(10, 10, 10);
+                result.scene.scale.set(4, 4, 4);
+                scene.add(result.scene);
+            });
+
+            var range = 40;
+            for (var i = 0; i < 750; i++) {
+                var particle = new THREE.Vector3(
+                    Math.random() * range - range / 2,
+                    0.3 * range * 1.5,
+                    //Math.random() * range - range / 2
+                    -6 + (i / 100)
+                )
+                particle.velocityY = 0.1 + Math.random() / 5;
+                particle.velocityX = 0;
+                geom.vertices.push(particle);
+                geom.colors.push(
+                    new THREE.Color(Math.random() * 0xffffff)
+                );
+            }
+
+            var range = 40;
+            for (var i = 0; i < 750; i++) {
+                var particle = new THREE.Vector3(
+                    7 + Math.random() * range - range / 2,
+                    0.3 * range * 1.5,
+                    // Math.random() * range - range / 2
+                    -13 + (i / 100)
+                )
+                particle.velocityY = 0.1 + Math.random() / 5;
+                particle.velocityX = 0;
+                geom.vertices.push(particle);
+                geom.colors.push(
+                    new THREE.Color(Math.random() * 0xffffff)
+                );
+            }
+
+            var range = 40;
+            for (var i = 0; i < 750; i++) {
+                var particle = new THREE.Vector3(
+                    -17 + Math.random() * range - range / 2,
+                    0.3 * range * 1.5,
+                    // Math.random() * range - range / 2
+                    -6 + (i / 100)
+                )
+                particle.velocityY = 0.1 + Math.random() / 5;
+                particle.velocityX = 0;
+                geom.vertices.push(particle);
+                geom.colors.push(
+                    new THREE.Color(Math.random() * 0xffffff)
+                );
+            }
+
+            var range = 40;
+            for (var i = 0; i < 750; i++) {
+                var particle = new THREE.Vector3(
+                    -10 + Math.random() * range - range / 2,
+                    0.3 * range * 1.5,
+                    // Math.random() * range - range / 2
+                    -13 + (i / 100)
+                )
+                particle.velocityY = 0.1 + Math.random() / 5;
+                particle.velocityX = 0;
+                geom.vertices.push(particle);
+                geom.colors.push(
+                    new THREE.Color(Math.random() * 0xffffff)
+                );
+            }
+
+            var range = 40;
+            for (var i = 0; i < 750; i++) {
+                var particle = new THREE.Vector3(
+                    21 + Math.random() * range - range / 2,
+                    0.3 * range * 1.5,
+                    // Math.random() * range - range / 4
+                    -6 + (i / 100)
+                )
+                particle.velocityY = 0.1 + Math.random() / 5;
+                particle.velocityX = 0;
+                geom.vertices.push(particle);
+                geom.colors.push(
+                    new THREE.Color(Math.random() * 0xffffff)
+                );
+            }
+
+            var range = 40;
+            for (var i = 0; i < 750; i++) {
+                var particle = new THREE.Vector3(
+                    28 + Math.random() * range - range / 2,
+                    0.3 * range * 1.5,
+                    // Math.random() * range - range / 4
+                    -13 + (i / 100)
+                )
+                particle.velocityY = 0.1 + Math.random() / 5;
+                particle.velocityX = 0;
+                geom.vertices.push(particle);
+                geom.colors.push(
+                    new THREE.Color(Math.random() * 0xffffff)
+                );
+            }
+            cloud = new THREE.Points(geom, material);
+            cloud.sortParticles = true;
+            cloud.name = "particles1"
+
+            scene.add(cloud);
+
+        } else if (weather == 'Snow'){
+            light2 = new THREE.PointLight(0xc4c4c4, 10);
+            light2.position.set(500, 100, 0);
+            light2.castShadow = true;
+            light2.intensity = 10;
+            scene.add(light2);
+            light3 = new THREE.PointLight(0xc4c4c4, 10);
+            light3.position.set(0, 100, -500);
+            light3.castShadow = true;
+            light3.intensity = 10;
+            scene.add(light3);
+            light4 = new THREE.PointLight(0xc4c4c4, 10);
+            light4.position.set(-500, 300, 500);
+            light4.castShadow = true;
+            light4.intensity = 10;
+            scene.add(light4);
+
+            loader1.load('../gLTF/clouds.gltf', function(result) {
+                // correctly position the scene
+                result.scene.position.set(-5, 20, 0);
+                // result.scene.scale.set(10, 10, 10);
+                result.scene.scale.set(4, 4, 4);
+                scene.add(result.scene);
+            });
+
+            loader1.load('../gLTF/clouds.gltf', function(result) {
+                // correctly position the scene
+                result.scene.position.set(-30, 20, 0);
+                // result.scene.scale.set(10, 10, 10);
+                result.scene.scale.set(4, 4, 4);
+                scene.add(result.scene);
+            });
+
+            loader1.load('../gLTF/clouds.gltf', function(result) {
+                // correctly position the scene
+                result.scene.position.set(20, 20, 0);
+                // result.scene.scale.set(10, 10, 10);
+                result.scene.scale.set(4, 4, 4);
+                scene.add(result.scene);
+            });
+
+            var range = 40;
+            for (var i = 0; i < 200; i++) {
+                var particle = new THREE.Vector3(
+                    Math.random() * range - range / 2,
+                    0.3 * range * 1.5,
+                    //Math.random() * range - range / 2
+                    -6 + (i / 100)
+                )
+                particle.velocityY = 0.1 + Math.random() / 5;
+                particle.velocityX = (Math.random() - 0.5) / 3;
+                geom.vertices.push(particle);
+                geom.colors.push(
+                    new THREE.Color(Math.random() * 0xffffff)
+                );
+            }
+
+            var range = 40;
+            for (var i = 0; i < 200; i++) {
+                var particle = new THREE.Vector3(
+                    7 + Math.random() * range - range / 2,
+                    0.3 * range * 1.5,
+                    // Math.random() * range - range / 2
+                    -13 + (i / 100)
+                )
+                particle.velocityY = 0.1 + Math.random() / 5;
+                particle.velocityX = (Math.random() - 0.5) / 3;
+                geom.vertices.push(particle);
+                geom.colors.push(
+                    new THREE.Color(Math.random() * 0xffffff)
+                );
+            }
+
+            var range = 40;
+            for (var i = 0; i < 200; i++) {
+                var particle = new THREE.Vector3(
+                    -17 + Math.random() * range - range / 2,
+                    0.3 * range * 1.5,
+                    // Math.random() * range - range / 2
+                    -6 + (i / 100)
+                )
+                particle.velocityY = 0.1 + Math.random() / 5;
+                particle.velocityX = (Math.random() - 0.5) / 3;
+                geom.vertices.push(particle);
+                geom.colors.push(
+                    new THREE.Color(Math.random() * 0xffffff)
+                );
+            }
+
+            var range = 40;
+            for (var i = 0; i < 200; i++) {
+                var particle = new THREE.Vector3(
+                    -10 + Math.random() * range - range / 2,
+                    0.3 * range * 1.5,
+                    // Math.random() * range - range / 2
+                    -13 + (i / 100)
+                )
+                particle.velocityY = 0.1 + Math.random() / 5;
+                particle.velocityX = (Math.random() - 0.5) / 3;
+                geom.vertices.push(particle);
+                geom.colors.push(
+                    new THREE.Color(Math.random() * 0xffffff)
+                );
+            }
+
+            var range = 40;
+            for (var i = 0; i < 200; i++) {
+                var particle = new THREE.Vector3(
+                    21 + Math.random() * range - range / 2,
+                    0.3 * range * 1.5,
+                    // Math.random() * range - range / 4
+                    -6 + (i / 100)
+                )
+                particle.velocityY = 0.1 + Math.random() / 5;
+                particle.velocityX = (Math.random() - 0.5) / 3;
+                geom.vertices.push(particle);
+                geom.colors.push(
+                    new THREE.Color(Math.random() * 0xffffff)
+                );
+            }
+
+            var range = 40;
+            for (var i = 0; i < 200; i++) {
+                var particle = new THREE.Vector3(
+                    28 + Math.random() * range - range / 2,
+                    0.3 * range * 1.5,
+                    // Math.random() * range - range / 4
+                    -13 + (i / 100)
+                )
+                particle.velocityY = 0.1 + Math.random() / 5;
+                particle.velocityX = (Math.random() - 0.5) / 3;
+                geom.vertices.push(particle);
+                geom.colors.push(
+                    new THREE.Color(Math.random() * 0xffffff)
+                );
+            }
+            cloud = new THREE.Points(geom, material2);
+            cloud.sortParticles = true;
+            cloud.name = "particles1"
+
+            scene.add(cloud);
+        }
+
+        // var helper = new THREE.PointLightHelper(pointLight);
+        // scene.add(helper);
       
-        var shadowHelper = new THREE.CameraHelper(pointLight.shadow.camera)
-        scene.add(shadowHelper);
+        // var shadowHelper = new THREE.CameraHelper(pointLight.shadow.camera)
+        // scene.add(shadowHelper);
 
         var helper = new THREE.PointLightHelper(light4);
         scene.add(helper);
@@ -277,128 +607,12 @@ function init(data) {
       
         var shadowHelper = new THREE.CameraHelper(light2.shadow.camera)
         scene.add(shadowHelper);
-    
-        var loader = new THREE.GLTFLoader();
-        loader.load('../gLTF/scene.gltf', function(result) {
-            // correctly position the scene
-            result.scene.position.set(0, -50, 0);
-            result.scene.scale.set(0.05, 0.05, 0.05);
-            scene.add(result.scene);
-        });
 
-        loader.load('../gLTF/sun.gltf', function(result) {
-            // correctly position the scene
-            result.scene.position.set(-5, 35, 0);
-            // result.scene.scale.set(10, 10, 10);
-            result.scene.scale.set(4, 4, 4);
-            scene.add(result.scene);
-        });
-
-        // initDefaultLighting(scene);
-        var loader1 = new THREE.GLTFLoader();
-        if (weather == 'Sun') {
-            loader1.load('../gLTF/sun.gltf', function(result) {
-                // correctly position the scene
-                result.scene.position.set(-5, 20, 0);
-                // result.scene.scale.set(10, 10, 10);
-                result.scene.scale.set(4, 4, 4);
-                scene.add(result.scene);
-            });
-
-        } else if (weather == 'Rain') {
-
-            loader1.load('../gLTF/clouds.gltf', function(result) {
-                // correctly position the scene
-                result.scene.position.set(-5, 20, 0);
-                // result.scene.scale.set(10, 10, 10);
-                result.scene.scale.set(4, 4, 4);
-                scene.add(result.scene);
-            });
-
-            var range = 40;
-            for (var i = 0; i < 1500; i++) {
-                var particle = new THREE.Vector3(
-                    2 + Math.random() * range - range / 2,
-                    0.3 * range * 1.5,
-                    // Math.random() * range - range / 2
-                    -7 + (i / 100)
-                )
-                particle.velocityY = 0.1 + Math.random() / 5;
-                particle.velocityX = 0;
-                geom.vertices.push(particle);
-                geom.colors.push(
-                    new THREE.Color(Math.random() * 0xffffff)
-                );
-            }
-
-            var range = 20;
-            for (var i = 0; i < 1500; i++) {
-                var particle = new THREE.Vector3(
-                    9 + Math.random() * range - range / 2,
-                    0.3 * range * 1.5,
-                    // Math.random() * range - range / 2
-                    -19 + (i / 100)
-                )
-                particle.velocityY = 0.1 + Math.random() / 5;
-                particle.velocityX = 0;
-                geom.vertices.push(particle);
-                geom.colors.push(
-                    new THREE.Color(Math.random() * 0xffffff)
-                );
-            }
-        } else if (weather == 'Snow'){
-            loader1.load('../gLTF/clouds.gltf', function(result) {
-                // correctly position the scene
-                result.scene.position.set(-5, 20, 0);
-                // result.scene.scale.set(10, 10, 10);
-                result.scene.scale.set(4, 4, 4);
-                scene.add(result.scene);
-            });
-
-            // var range = 40;
-            // for (var i = 0; i < 1500; i++) {
-            //     var particle = new THREE.Vector3(
-            //         2 + Math.random() * range - range / 2,
-            //         0.3 * range * 1.5,
-            //         // Math.random() * range - range / 2
-            //         -7 + (i / 100)
-            //     )
-            //     particle.velocityY = 0.1 + Math.random() / 5;
-            //     particle.velocityX = 0;
-            //     geom.vertices.push(particle);
-            //     geom.colors.push(
-            //         new THREE.Color(Math.random() * 0xffffff)
-            //     );
-            // }
-
-            // var range = 20;
-            // for (var i = 0; i < 1500; i++) {
-            //     var particle = new THREE.Vector3(
-            //         9 + Math.random() * range - range / 2,
-            //         0.3 * range * 1.5,
-            //         // Math.random() * range - range / 2
-            //         -19 + (i / 100)
-            //     )
-            //     particle.velocityY = 0.1 + Math.random() / 5;
-            //     particle.velocityX = 0;
-            //     geom.vertices.push(particle);
-            //     geom.colors.push(
-            //         new THREE.Color(Math.random() * 0xffffff)
-            //     );
-            // }
-        }
-
-
-        cloud = new THREE.Points(geom, material);
-        cloud.sortParticles = true;
-        cloud.name = "particles1"
-
-        snow = new THREE.Points(geom, material2);
-        snow.sortParticles = true;
-        snow.name = "particles2"
-
-        scene.add(cloud);
-        // scene.add(snow);
+        var helper = new THREE.PointLightHelper(light3);
+        scene.add(helper);
+      
+        var shadowHelper = new THREE.CameraHelper(light3.shadow.camera)
+        scene.add(shadowHelper);
     }
 
     function render() {
@@ -412,7 +626,7 @@ function init(data) {
             v.x = v.x - (v.velocityX);
 
             if (v.y <= -45) v.y = 15;
-            if (v.x <= -20 || v.x >= 20) v.velocityX = v.velocityX * -1;
+            if (v.x <= -40 || v.x >= 40) v.velocityX = v.velocityX * -1;
         });
         cloud.geometry.verticesNeedUpdate = true;
 
