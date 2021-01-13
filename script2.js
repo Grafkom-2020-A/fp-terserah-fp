@@ -203,6 +203,8 @@ function init(data) {
 
         var texture = new THREE.TextureLoader().load("../particles/raindrop-3.png");
         var texture2 = new THREE.TextureLoader().load("../particles/snowflake2_t.png");
+        var textureg = new THREE.TextureLoader().load("../particles/g.png");
+        var texturewat = new THREE.TextureLoader().load("../particles/wat.png");
 
         var geom = new THREE.Geometry();
 
@@ -236,13 +238,19 @@ function init(data) {
             // correctly position the scene
             result.scene.position.set(0, -50, 0);
             result.scene.scale.set(0.05, 0.05, 0.05);
-            // var model = result.scene;
-            // var newMaterial = new THREE.MeshStandardMaterial({
-
-            // });
-            // model.traverse((o) => {
-            // if (o.isMesh) o.material = newMaterial;
-            // });
+            var model = result.scene;
+                model.traverse ( ( o ) => {
+                  if ( o.isMesh ) {
+                    // ketutup salju
+                    o.material.emissiveMap = textureg;
+                    o.material.emissiveIntensity = 0.4;
+                    //kena hujan
+                    // o.material.emissiveMap = texturewat;
+                    // o.material.emissiveIntensity = 0.2;
+                    // o.material.roughness = 0.4;
+                    // o.material.metalness = 1;
+                  }
+                } );
             scene.add(result.scene);
         });
 
