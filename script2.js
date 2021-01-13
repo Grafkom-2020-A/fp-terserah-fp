@@ -24,20 +24,22 @@ function setup() {
     nextbutton = select('#beforeButton');
     nextbutton.mousePressed(forecastWeatherBefore);
 
-    function searchbycity() {
-        let term = userInput.value();
-        var id = appid;
 
-        // Load JSON data
-        url = curweatherURL + term + id;
-        window.value = url;
-        loadJSON(url, init, 'json');
-        // loadJSON(url, init, 'json');
-        console.log(url);
+}
 
-        
+function searchbycity() {
+    let term = userInput.value();
+    var id = appid;
 
-    }
+    // Load JSON data
+    url = curweatherURL + term + id;
+    window.value = url;
+    loadJSON(url, init, 'json');
+    // loadJSON(url, init, 'json');
+    console.log(url);
+
+    
+
 }
 
 function forecastWeatherNext() {
@@ -67,6 +69,10 @@ function forecastWeatherBefore() {
         // loadJSON(url, init, 'json');
         console.log(url);
         iterator -= 1;
+    }
+
+    else {
+        searchbycity();
     }
 
 
