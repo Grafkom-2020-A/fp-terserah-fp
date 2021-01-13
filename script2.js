@@ -192,6 +192,7 @@ function init(data) {
     var clock = new THREE.Clock();
     var scene = new THREE.Scene();
 
+
     var cloud;
     createPointCloud(3, true, 1, true,
         0xffffff);
@@ -229,42 +230,25 @@ function init(data) {
         var ambientLight = new THREE.AmbientLight("#ffffff");
         scene.add(ambientLight);
       
-        // the point light where working with
-        var pointColor = "#ccffcc";
-        var pointLight = new THREE.PointLight(pointColor);
-        pointLight.position.set(-5, 35, 0);
-        pointLight.intensity = 5;
-        pointLight.decay = 2;
-      
-        pointLight.castShadow = true;
-      
-        // scene.add(pointLight);
-
-        const materialo = new THREE.MeshPhongMaterial();
       
         var loader = new THREE.GLTFLoader();
         loader.load('../gLTF/scene.gltf', function(result) {
             // correctly position the scene
             result.scene.position.set(0, -50, 0);
             result.scene.scale.set(0.05, 0.05, 0.05);
+            // var model = result.scene;
+            // var newMaterial = new THREE.MeshStandardMaterial({
+
+            // });
+            // model.traverse((o) => {
+            // if (o.isMesh) o.material = newMaterial;
+            // });
             scene.add(result.scene);
         });
 
-        weather = "Snow";
-
         // initDefaultLighting(scene);
         var loader1 = new THREE.GLTFLoader();
-        if (weather == 'Sun') {
-            loader1.load('../gLTF/sun.gltf', function(result) {
-                // correctly position the scene
-                result.scene.position.set(-5, 35, 0);
-                //20
-                // result.scene.scale.set(10, 10, 10);
-                result.scene.scale.set(4, 4, 4);
-                scene.add(result.scene);
-            });
-        } else if (weather == 'Clouds') {
-
+        if (weather == 'Clouds') {
             light2 = new THREE.PointLight(0xc4c4c4, 10);
             light2.position.set(500, 100, 0);
             light2.castShadow = true;
@@ -304,7 +288,7 @@ function init(data) {
                 result.scene.scale.set(4, 4, 4);
                 scene.add(result.scene);
             });
-        } else if (weather == 'Rain') {
+        } else if (weather == 'Rain' || weather == 'Drizzle' || weather == 'Thunderstorm' ) {
 
             light2 = new THREE.PointLight(0xc4c4c4, 10);
             light2.position.set(500, 100, 0);
@@ -601,6 +585,42 @@ function init(data) {
             cloud.name = "particles2"
 
             scene.add(cloud);
+        } else {
+
+            var pointColor = "#ccffcc";
+            var pointLight = new THREE.PointLight(pointColor);
+            pointLight.position.set(-5, 35, 0);
+            pointLight.intensity = 5;
+            pointLight.decay = 2;
+          
+            pointLight.castShadow = true;
+          
+            scene.add(pointLight);
+
+            light2 = new THREE.PointLight(0xc4c4c4, 10);
+            light2.position.set(500, 100, 0);
+            light2.castShadow = true;
+            light2.intensity = 8;
+            scene.add(light2);
+            light3 = new THREE.PointLight(0xc4c4c4, 10);
+            light3.position.set(0, 100, -500);
+            light3.castShadow = true;
+            light3.intensity = 8;
+            scene.add(light3);
+            light4 = new THREE.PointLight(0xc4c4c4, 10);
+            light4.position.set(-500, 300, 500);
+            light4.castShadow = true;
+            light4.intensity = 8;
+            scene.add(light4);
+
+            loader1.load('../gLTF/sun.gltf', function(result) {
+                // correctly position the scene
+                result.scene.position.set(-5, 35, 0);
+                //20
+                // result.scene.scale.set(10, 10, 10);
+                result.scene.scale.set(4, 4, 4);
+                scene.add(result.scene);
+            });
         }
 
         // var helper = new THREE.PointLightHelper(pointLight);
@@ -609,23 +629,23 @@ function init(data) {
         // var shadowHelper = new THREE.CameraHelper(pointLight.shadow.camera)
         // scene.add(shadowHelper);
 
-        var helper = new THREE.PointLightHelper(light4);
-        scene.add(helper);
+        // var helper = new THREE.PointLightHelper(light4);
+        // scene.add(helper);
       
-        var shadowHelper = new THREE.CameraHelper(light4.shadow.camera)
-        scene.add(shadowHelper);
+        // var shadowHelper = new THREE.CameraHelper(light4.shadow.camera)
+        // scene.add(shadowHelper);
 
-        var helper = new THREE.PointLightHelper(light2);
-        scene.add(helper);
+        // var helper = new THREE.PointLightHelper(light2);
+        // scene.add(helper);
       
-        var shadowHelper = new THREE.CameraHelper(light2.shadow.camera)
-        scene.add(shadowHelper);
+        // var shadowHelper = new THREE.CameraHelper(light2.shadow.camera)
+        // scene.add(shadowHelper);
 
-        var helper = new THREE.PointLightHelper(light3);
-        scene.add(helper);
+        // var helper = new THREE.PointLightHelper(light3);
+        // scene.add(helper);
       
-        var shadowHelper = new THREE.CameraHelper(light3.shadow.camera)
-        scene.add(shadowHelper);
+        // var shadowHelper = new THREE.CameraHelper(light3.shadow.camera)
+        // scene.add(shadowHelper);
     }
 
     function render() {
@@ -633,15 +653,17 @@ function init(data) {
         // stats.update();
         orbitControls.update(clock.getDelta());
         // trackballControls.update(clock.getDelta());
-        var vertices = cloud.geometry.vertices;
-        vertices.forEach(function(v) {
-            v.y = v.y - (v.velocityY);
-            v.x = v.x - (v.velocityX);
+        if(weather == 'Rain' || weather == 'Snow' ){
+            var vertices = cloud.geometry.vertices;
+            vertices.forEach(function(v) {
+                v.y = v.y - (v.velocityY);
+                v.x = v.x - (v.velocityX);
 
-            if (v.y <= -45) v.y = 15;
-            if (v.x <= -40 || v.x >= 40) v.velocityX = v.velocityX * -1;
-        });
-        cloud.geometry.verticesNeedUpdate = true;
+                if (v.y <= -45) v.y = 15;
+                if (v.x <= -40 || v.x >= 40) v.velocityX = v.velocityX * -1;
+            });
+            cloud.geometry.verticesNeedUpdate = true;
+        }
 
         requestAnimationFrame(render);
         renderer.render(scene, camera);

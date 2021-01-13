@@ -23,20 +23,21 @@ function initStats(type) {
  */
 function initRenderer(additionalProperties) {
 
+    var output = document.getElementById("webgl-output")
+    if(document.getElementsByTagName("canvas")){
+        output.removeChild(output.lastChild); 
+    }
+
     var props = (typeof additionalProperties !== 'undefined' && additionalProperties) ? additionalProperties : {};
     var renderer = new THREE.WebGLRenderer(props);
     renderer.shadowMap.enabled = true;
     renderer.shadowMapSoft = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-    var output = document.getElementById("webgl-output")
     renderer.setClearColor(new THREE.Color(0x000000));
     renderer.setSize(window.innerWidth*0.98, window.innerHeight/1.6);
     renderer.shadowMap.enabled = true;
-    if(document.getElementsByTagName("canvas")){
-        output.removeChild(output.lastChild);
-    }
-        output.appendChild(renderer.domElement);
+    output.appendChild(renderer.domElement);
     return renderer;
 }
 
