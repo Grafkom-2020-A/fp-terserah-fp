@@ -346,7 +346,48 @@ function init(data) {
                     new THREE.Color(Math.random() * 0xffffff)
                 );
             }
+        } else if (weather == 'Snow'){
+            loader1.load('../gLTF/clouds.gltf', function(result) {
+                // correctly position the scene
+                result.scene.position.set(-5, 20, 0);
+                // result.scene.scale.set(10, 10, 10);
+                result.scene.scale.set(4, 4, 4);
+                scene.add(result.scene);
+            });
+
+            // var range = 40;
+            // for (var i = 0; i < 1500; i++) {
+            //     var particle = new THREE.Vector3(
+            //         2 + Math.random() * range - range / 2,
+            //         0.3 * range * 1.5,
+            //         // Math.random() * range - range / 2
+            //         -7 + (i / 100)
+            //     )
+            //     particle.velocityY = 0.1 + Math.random() / 5;
+            //     particle.velocityX = 0;
+            //     geom.vertices.push(particle);
+            //     geom.colors.push(
+            //         new THREE.Color(Math.random() * 0xffffff)
+            //     );
+            // }
+
+            // var range = 20;
+            // for (var i = 0; i < 1500; i++) {
+            //     var particle = new THREE.Vector3(
+            //         9 + Math.random() * range - range / 2,
+            //         0.3 * range * 1.5,
+            //         // Math.random() * range - range / 2
+            //         -19 + (i / 100)
+            //     )
+            //     particle.velocityY = 0.1 + Math.random() / 5;
+            //     particle.velocityX = 0;
+            //     geom.vertices.push(particle);
+            //     geom.colors.push(
+            //         new THREE.Color(Math.random() * 0xffffff)
+            //     );
+            // }
         }
+
 
         cloud = new THREE.Points(geom, material);
         cloud.sortParticles = true;
