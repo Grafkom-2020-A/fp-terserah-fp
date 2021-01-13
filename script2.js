@@ -11,6 +11,7 @@ var forecastURL = 'http://api.openweathermap.org/data/2.5/forecast?q='; //+city
 let appid = '&units=metric&appid=36369af9d5acd7def902ad1bc5f5c968';
 let userInput;
 let url;
+let iterator=0;
 
 function setup() {
     userInput = select('#userInput');
@@ -88,16 +89,17 @@ function init(data) {
 
     if (isForecast(url) != -1) {
         // Assign data dari API ke variabel (forecast) 
-        temp = data.list[0].main.temp;
-        feels_like = data.list[0].main.feels_like;
-        temp_min = data.list[0].main.temp_min;
-        temp_max = data.list[0].main.temp_max;
-        pressure = data.list[0].main.pressure;
-        humidity = data.list[0].main.humidity;
-        visibility = data.list[0].visibility;
-        weather = data.list[0].weather[0].main;
+        temp = data.list[iterator].main.temp;
+        feels_like = data.list[iterator].main.feels_like;
+        temp_min = data.list[iterator].main.temp_min;
+        temp_max = data.list[iterator].main.temp_max;
+        pressure = data.list[iterator].main.pressure;
+        humidity = data.list[iterator].main.humidity;
+        visibility = data.list[iterator].visibility;
+        weather = data.list[iterator].weather[0].main;
         city = data.city.name;
-        date = data.list[0].dt_txt;
+        date = data.list[iterator].dt_txt;
+        iterator = iterator + 1;
     } else {
 
         //Assign Data dari Current weather API ke variable
