@@ -682,6 +682,14 @@ function init(data) {
             light4.intensity = 8;
             scene.add(light4);
 
+            // loader1.load('../gLTF/new/scene.gltf', function (result) {
+            //     // correctly position the scene
+            //     result.scene.position.set(-5, 35, 0);
+            //     //20
+            //     // result.scene.scale.set(10, 10, 10);
+            //     result.scene.scale.set(4, 4, 4);
+            //     scene.add(result.scene);
+            // });
             loader1.load('../gLTF/sun.gltf', function (result) {
                 // correctly position the scene
                 result.scene.position.set(-5, 35, 0);
