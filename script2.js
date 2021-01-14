@@ -140,8 +140,15 @@ function init(data) {
         visibility = data.visibility;
         weather = data.weather[0].main;
         city = data.name;
-        datevar = new Date();
-        date = datevar.toLocaleString();
+        // datevar = new Date();
+        // date = datevar.toLocaleString();
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        var hours = today.toLocaleTimeString();
+        today = dd + '/' + mm + '/' + yyyy + ' ' + hours;
+        date = today.toLocaleString();
     }
 
 
