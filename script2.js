@@ -185,11 +185,13 @@ function init(data) {
     // renderer.gammaOutput = true;
     // renderer.gammaFactor = 2.2;
     var camera = initCamera(new THREE.Vector3(0, 0, 100));
-    // var trackballControls = initTrackballControls(camera, renderer);
     var orbitControls = initOrbitControls(camera, renderer);
     var clock = new THREE.Clock();
     var scene = new THREE.Scene();
     var mixers = [];
+    var mixers2 = [];
+    var mesh,mesh2;
+    var pivot,pivot2;
 
     var cloud;
     createPointCloud(3, true, 1, true,
@@ -201,9 +203,6 @@ function init(data) {
 
         var texture = new THREE.TextureLoader().load("../particles/raindrop-3.png");
         var texture2 = new THREE.TextureLoader().load("../particles/snowflake2_t.png");
-        var textureg = new THREE.TextureLoader().load("../particles/g.png");
-        var texturewat = new THREE.TextureLoader().load("../particles/wat.png");
-
         var geom = new THREE.Geometry();
 
         var material = new THREE.PointsMaterial({
@@ -242,11 +241,13 @@ function init(data) {
             model.traverse((o) => {
                 if (o.isMesh) {
                     if (weather == 'Snow') {
+                        var textureg = new THREE.TextureLoader().load("../particles/g.png");                
                         // ketutup salju
                         o.material.emissiveMap = textureg;
                         o.material.emissiveIntensity = 0.4;
                     }
                     if (weather == 'Rain' || weather == 'Thunderstorm') {
+                        var texturewat = new THREE.TextureLoader().load("../particles/wat.png");
                         // ketutup salju
                         o.material.emissiveMap = texturewat;
                         o.material.emissiveIntensity = 0.15;
@@ -262,67 +263,100 @@ function init(data) {
         });
 
         loader.load('../gLTF/Flamingo.glb', function (result) {
-            const mesh = result.scene.children[0];
-            mesh.scale.set(0.05, 0.05, 0.05);
-            mesh.position.set(0, 0, 0);
+            mesh = result.scene.children[0];
+            mesh.scale.set(0.025, 0.025, 0.025);
+            mesh.position.set(30, 0, 0);
 
             mesh.castShadow = true;
             mesh.receiveShadow = true;
 
-            scene.add(mesh);
+            pivot = new THREE.Group();
+            scene.add(pivot);
+            pivot.add(mesh);
 
             const mixer = new THREE.AnimationMixer(mesh);
-            mixer.clipAction(result.animations[0]).setDuration(0.1).play();
+            mixer.clipAction(result.animations[0]).setDuration(1).play();
             mixers.push(mixer);
-
-            mixer = new THREE.AnimationMixer( result.scene );
-            animationClip = result.animations[0];
-            clipAction = mixer.clipAction( animationClip ).play();
-            animationClip = clipAction.getClip();
-            // scene.add(result.scene);
         });
+
+        loader.load('../gLTF/Flamingo.glb', function (result) {
+            mesh2 = result.scene.children[0];
+            mesh2.scale.set(0.025, 0.025, 0.025);
+            mesh2.position.set(-25, -15, 0);
+
+            mesh2.castShadow = true;
+            mesh2.receiveShadow = true;
+
+            pivot2 = new THREE.Group();
+            scene.add(pivot2);
+            pivot2.add(mesh2);
+
+            const mixer = new THREE.AnimationMixer(mesh2);
+            mixer.clipAction(result.animations[0]).setDuration(1).play();
+            mixers2.push(mixer);
+        });
+
+
 
         // initDefaultLighting(scene);
         var loader1 = new THREE.GLTFLoader();
         if (weather == 'Clouds') {
             $('.Weather').append("Berawan");
+            var pointColor = "#ccffcc";
+            var pointLight = new THREE.PointLight(pointColor);
+            pointLight.position.set(-5, 35, 0);
+            pointLight.intensity = 4;
+            pointLight.decay = 2;
+
+            pointLight.castShadow = true;
+
+            scene.add(pointLight);
             light2 = new THREE.PointLight(0xc4c4c4, 10);
             light2.position.set(500, 100, 0);
             light2.castShadow = true;
-            light2.intensity = 6;
+            light2.intensity = 3;
             scene.add(light2);
             light3 = new THREE.PointLight(0xc4c4c4, 10);
             light3.position.set(0, 100, -500);
             light3.castShadow = true;
-            light3.intensity = 6;
+            light3.intensity = 3;
             scene.add(light3);
             light4 = new THREE.PointLight(0xc4c4c4, 10);
             light4.position.set(-500, 300, 500);
             light4.castShadow = true;
-            light4.intensity = 6;
+            light4.intensity = 3;
             scene.add(light4);
+
+            loader1.load('../gLTF/sun.gltf', function (result) {
+                // correctly position the scene
+                result.scene.position.set(-5, 35, 0);
+                //20
+                // result.scene.scale.set(10, 10, 10);
+                result.scene.scale.set(4, 4, 4);
+                scene.add(result.scene);
+            });
 
             loader1.load('../gLTF/clouds.gltf', function (result) {
                 // correctly position the scene
                 result.scene.position.set(-5, 20, 0);
                 // result.scene.scale.set(10, 10, 10);
-                result.scene.scale.set(4, 4, 4);
+                result.scene.scale.set(3, 3, 3);
                 scene.add(result.scene);
             });
 
             loader1.load('../gLTF/clouds.gltf', function (result) {
                 // correctly position the scene
-                result.scene.position.set(-30, 20, 0);
+                result.scene.position.set(-40, 20, 0);
                 // result.scene.scale.set(10, 10, 10);
-                result.scene.scale.set(4, 4, 4);
+                result.scene.scale.set(3, 3, 3);
                 scene.add(result.scene);
             });
 
             loader1.load('../gLTF/clouds.gltf', function (result) {
                 // correctly position the scene
-                result.scene.position.set(20, 20, 0);
+                result.scene.position.set(30, 20, 0);
                 // result.scene.scale.set(10, 10, 10);
-                result.scene.scale.set(4, 4, 4);
+                result.scene.scale.set(3, 3, 3);
                 scene.add(result.scene);
             });
         } else if (weather == 'Rain' || weather == 'Drizzle' || weather == 'Thunderstorm') {
@@ -686,7 +720,8 @@ function init(data) {
     function render() {
 
         // stats.update();
-        orbitControls.update(clock.getDelta());
+        var delta = clock.getDelta();
+        orbitControls.update(delta);
         // trackballControls.update(clock.getDelta());
         if (weather == 'Rain' || weather == 'Snow') {
             var vertices = cloud.geometry.vertices;
@@ -700,12 +735,18 @@ function init(data) {
             cloud.geometry.verticesNeedUpdate = true;
         }
 
+        if (mesh) {
+            pivot.rotation.y -= 0.0125/2;
+            pivot2.rotation.y += 0.0125;
+        }
+
         requestAnimationFrame(render);
         renderer.render(scene, camera);
         for ( let i = 0; i < mixers.length; i ++ ) {
-            mixers[ i ].update( clock.getDelta() );
-
+            mixers2[ i ].update( delta );
+            mixers[ i ].update( delta );
         }
+
     }
 
 }
