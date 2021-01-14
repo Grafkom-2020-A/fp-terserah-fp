@@ -109,7 +109,7 @@ function init() {
             mixers2.push(mixer);
         });
 
-        loader1.load('../gLTF/sun.gltf', function (result) {
+        loader1.load('../gLTF/new/scene.gltf', function (result) {
             // correctly position the scene
             result.scene.position.set(-5, 35, 0);
             //20
