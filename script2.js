@@ -637,29 +637,29 @@ function init(data) {
             });
         }
 
-        var helper = new THREE.PointLightHelper(pointLight);
-        scene.add(helper);
+        // var helper = new THREE.PointLightHelper(pointLight);
+        // scene.add(helper);
 
-        var shadowHelper = new THREE.CameraHelper(pointLight.shadow.camera)
-        scene.add(shadowHelper);
+        // var shadowHelper = new THREE.CameraHelper(pointLight.shadow.camera)
+        // scene.add(shadowHelper);
 
-        var helper = new THREE.PointLightHelper(light4);
-        scene.add(helper);
+        // var helper = new THREE.PointLightHelper(light4);
+        // scene.add(helper);
 
-        var shadowHelper = new THREE.CameraHelper(light4.shadow.camera)
-        scene.add(shadowHelper);
+        // var shadowHelper = new THREE.CameraHelper(light4.shadow.camera)
+        // scene.add(shadowHelper);
 
-        var helper = new THREE.PointLightHelper(light2);
-        scene.add(helper);
+        // var helper = new THREE.PointLightHelper(light2);
+        // scene.add(helper);
 
-        var shadowHelper = new THREE.CameraHelper(light2.shadow.camera)
-        scene.add(shadowHelper);
+        // var shadowHelper = new THREE.CameraHelper(light2.shadow.camera)
+        // scene.add(shadowHelper);
 
-        var helper = new THREE.PointLightHelper(light3);
-        scene.add(helper);
+        // var helper = new THREE.PointLightHelper(light3);
+        // scene.add(helper);
 
-        var shadowHelper = new THREE.CameraHelper(light3.shadow.camera)
-        scene.add(shadowHelper);
+        // var shadowHelper = new THREE.CameraHelper(light3.shadow.camera)
+        // scene.add(shadowHelper);
     }
 
     function render() {
