@@ -1,5 +1,5 @@
-$(document).ready(function() {
-    $("form").submit(function(e) {
+$(document).ready(function () {
+    $("form").submit(function (e) {
         e.preventDefault();
         var userinput = $("#userInput").val();
         // console.log(userinput);
@@ -189,7 +189,7 @@ function init(data) {
     var orbitControls = initOrbitControls(camera, renderer);
     var clock = new THREE.Clock();
     var scene = new THREE.Scene();
-
+    var mixers = [];
 
     var cloud;
     createPointCloud(3, true, 1, true,
@@ -234,19 +234,19 @@ function init(data) {
 
 
         var loader = new THREE.GLTFLoader();
-        loader.load('../gLTF/scene.gltf', function(result) {
+        loader.load('../gLTF/scene.gltf', function (result) {
             // correctly position the scene
             result.scene.position.set(0, -50, 0);
             result.scene.scale.set(0.05, 0.05, 0.05);
             var model = result.scene;
             model.traverse((o) => {
                 if (o.isMesh) {
-                    if (weather == 'Snow'){
+                    if (weather == 'Snow') {
                         // ketutup salju
                         o.material.emissiveMap = textureg;
                         o.material.emissiveIntensity = 0.4;
                     }
-                    if (weather == 'Rain' || weather == 'Thunderstorm'){
+                    if (weather == 'Rain' || weather == 'Thunderstorm') {
                         // ketutup salju
                         o.material.emissiveMap = texturewat;
                         o.material.emissiveIntensity = 0.15;
@@ -259,6 +259,27 @@ function init(data) {
                 }
             });
             scene.add(result.scene);
+        });
+
+        loader.load('../gLTF/Flamingo.glb', function (result) {
+            const mesh = result.scene.children[0];
+            mesh.scale.set(0.05, 0.05, 0.05);
+            mesh.position.set(0, 0, 0);
+
+            mesh.castShadow = true;
+            mesh.receiveShadow = true;
+
+            scene.add(mesh);
+
+            const mixer = new THREE.AnimationMixer(mesh);
+            mixer.clipAction(result.animations[0]).setDuration(0.1).play();
+            mixers.push(mixer);
+
+            mixer = new THREE.AnimationMixer( result.scene );
+            animationClip = result.animations[0];
+            clipAction = mixer.clipAction( animationClip ).play();
+            animationClip = clipAction.getClip();
+            // scene.add(result.scene);
         });
 
         // initDefaultLighting(scene);
@@ -281,7 +302,7 @@ function init(data) {
             light4.intensity = 6;
             scene.add(light4);
 
-            loader1.load('../gLTF/clouds.gltf', function(result) {
+            loader1.load('../gLTF/clouds.gltf', function (result) {
                 // correctly position the scene
                 result.scene.position.set(-5, 20, 0);
                 // result.scene.scale.set(10, 10, 10);
@@ -289,7 +310,7 @@ function init(data) {
                 scene.add(result.scene);
             });
 
-            loader1.load('../gLTF/clouds.gltf', function(result) {
+            loader1.load('../gLTF/clouds.gltf', function (result) {
                 // correctly position the scene
                 result.scene.position.set(-30, 20, 0);
                 // result.scene.scale.set(10, 10, 10);
@@ -297,7 +318,7 @@ function init(data) {
                 scene.add(result.scene);
             });
 
-            loader1.load('../gLTF/clouds.gltf', function(result) {
+            loader1.load('../gLTF/clouds.gltf', function (result) {
                 // correctly position the scene
                 result.scene.position.set(20, 20, 0);
                 // result.scene.scale.set(10, 10, 10);
@@ -322,7 +343,7 @@ function init(data) {
             light4.intensity = 4;
             scene.add(light4);
 
-            loader1.load('../gLTF/clouds.gltf', function(result) {
+            loader1.load('../gLTF/clouds.gltf', function (result) {
                 // correctly position the scene
                 result.scene.position.set(-5, 20, 0);
                 // result.scene.scale.set(10, 10, 10);
@@ -330,7 +351,7 @@ function init(data) {
                 scene.add(result.scene);
             });
 
-            loader1.load('../gLTF/clouds.gltf', function(result) {
+            loader1.load('../gLTF/clouds.gltf', function (result) {
                 // correctly position the scene
                 result.scene.position.set(-30, 20, 0);
                 // result.scene.scale.set(10, 10, 10);
@@ -338,7 +359,7 @@ function init(data) {
                 scene.add(result.scene);
             });
 
-            loader1.load('../gLTF/clouds.gltf', function(result) {
+            loader1.load('../gLTF/clouds.gltf', function (result) {
                 // correctly position the scene
                 result.scene.position.set(20, 20, 0);
                 // result.scene.scale.set(10, 10, 10);
@@ -362,7 +383,7 @@ function init(data) {
                 );
             }
 
-            var range = 40;
+            range = 40;
             for (var i = 0; i < 750; i++) {
                 var particle = new THREE.Vector3(
                     7 + Math.random() * range - range / 2,
@@ -378,7 +399,7 @@ function init(data) {
                 );
             }
 
-            var range = 40;
+            range = 40;
             for (var i = 0; i < 750; i++) {
                 var particle = new THREE.Vector3(-17 + Math.random() * range - range / 2,
                     0.3 * range * 1.5,
@@ -393,7 +414,7 @@ function init(data) {
                 );
             }
 
-            var range = 40;
+            range = 40;
             for (var i = 0; i < 750; i++) {
                 var particle = new THREE.Vector3(-10 + Math.random() * range - range / 2,
                     0.3 * range * 1.5,
@@ -408,7 +429,7 @@ function init(data) {
                 );
             }
 
-            var range = 40;
+            range = 40;
             for (var i = 0; i < 750; i++) {
                 var particle = new THREE.Vector3(
                     21 + Math.random() * range - range / 2,
@@ -424,7 +445,7 @@ function init(data) {
                 );
             }
 
-            var range = 40;
+            range = 40;
             for (var i = 0; i < 750; i++) {
                 var particle = new THREE.Vector3(
                     28 + Math.random() * range - range / 2,
@@ -463,7 +484,7 @@ function init(data) {
             light4.intensity = 10;
             scene.add(light4);
 
-            loader1.load('../gLTF/clouds.gltf', function(result) {
+            loader1.load('../gLTF/clouds.gltf', function (result) {
                 // correctly position the scene
                 result.scene.position.set(-5, 20, 0);
                 // result.scene.scale.set(10, 10, 10);
@@ -471,7 +492,7 @@ function init(data) {
                 scene.add(result.scene);
             });
 
-            loader1.load('../gLTF/clouds.gltf', function(result) {
+            loader1.load('../gLTF/clouds.gltf', function (result) {
                 // correctly position the scene
                 result.scene.position.set(-30, 20, 0);
                 // result.scene.scale.set(10, 10, 10);
@@ -479,7 +500,7 @@ function init(data) {
                 scene.add(result.scene);
             });
 
-            loader1.load('../gLTF/clouds.gltf', function(result) {
+            loader1.load('../gLTF/clouds.gltf', function (result) {
                 // correctly position the scene
                 result.scene.position.set(20, 20, 0);
                 // result.scene.scale.set(10, 10, 10);
@@ -487,7 +508,7 @@ function init(data) {
                 scene.add(result.scene);
             });
 
-            var range = 40;
+            range = 40;
             for (var i = 0; i < 750; i++) {
                 if (i % 5 == 0) {
                     var particle = new THREE.Vector3(
@@ -505,7 +526,7 @@ function init(data) {
                 }
             }
 
-            var range = 40;
+            range = 40;
             for (var i = 0; i < 750; i++) {
                 if (i % 5 == 0) {
                     var particle = new THREE.Vector3(
@@ -523,7 +544,7 @@ function init(data) {
                 }
             }
 
-            var range = 40;
+            range = 40;
             for (var i = 0; i < 750; i++) {
                 if (i % 5 == 0) {
                     var particle = new THREE.Vector3(-17 + Math.random() * range - range / 2,
@@ -540,7 +561,7 @@ function init(data) {
                 }
             }
 
-            var range = 40;
+            range = 40;
             for (var i = 0; i < 750; i++) {
                 if (i % 5 == 0) {
 
@@ -558,7 +579,7 @@ function init(data) {
                 }
             }
 
-            var range = 40;
+            range = 40;
             for (var i = 0; i < 750; i++) {
                 if (i % 5 == 0) {
                     var particle = new THREE.Vector3(
@@ -576,7 +597,7 @@ function init(data) {
                 }
             }
 
-            var range = 40;
+            range = 40;
             for (var i = 0; i < 750; i++) {
                 if (i % 5 == 0) {
                     var particle = new THREE.Vector3(
@@ -627,7 +648,7 @@ function init(data) {
             light4.intensity = 8;
             scene.add(light4);
 
-            loader1.load('../gLTF/sun.gltf', function(result) {
+            loader1.load('../gLTF/sun.gltf', function (result) {
                 // correctly position the scene
                 result.scene.position.set(-5, 35, 0);
                 //20
@@ -669,7 +690,7 @@ function init(data) {
         // trackballControls.update(clock.getDelta());
         if (weather == 'Rain' || weather == 'Snow') {
             var vertices = cloud.geometry.vertices;
-            vertices.forEach(function(v) {
+            vertices.forEach(function (v) {
                 v.y = v.y - (v.velocityY);
                 v.x = v.x - (v.velocityX);
 
@@ -681,6 +702,10 @@ function init(data) {
 
         requestAnimationFrame(render);
         renderer.render(scene, camera);
+        for ( let i = 0; i < mixers.length; i ++ ) {
+            mixers[ i ].update( clock.getDelta() );
+
+        }
     }
 
 }
