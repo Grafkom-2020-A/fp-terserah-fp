@@ -1,13 +1,19 @@
 * {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: black;
+    /* background-image: ; */
 }
 
 body {
     position: flex;
     margin: 0;
     overflow-x: hidden;
+    /* background-color: black; */
 }
+
+/* .bruh {
+    background-color: black;
+} */
 
 canvas {
     display: block;
@@ -66,20 +72,22 @@ p {
     /* aslinya 0 aku coba ngeluasin kanvas */
     width: 100%;
     padding: 5px 20px;
-    opacity: 1;
+    background-color: black;
+    /* opacity: 1;
     background-color: rgba(0,0,0,0.6);
     background:transparent;
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#3C000000,endColorstr=#3C000000); 
-    zoom: 1;
+    zoom: 1; */
 }
 
 .footer_group {
     border-top: 1px solid #ddd;
-    opacity: 1;
+    background-color: black;
+    /* opacity: 1;
     background-color: rgba(0,0,0,0.6);
     background:transparent;
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#3C000000,endColorstr=#3C000000); 
-    zoom: 1;
+    zoom: 1; */
 }
 
 .ehe {
@@ -114,3 +122,21 @@ p {
     color: white;
     margin-bottom: 10px;
 }
+
+.coolShadow {
+    color: white; 
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    text-shadow: 
+      -1px 1px 0 #000,
+      -2px 2px 0 #000,
+      -3px 3px 0 #000,
+      -4px 4px 0 #000,
+      -5px 5px 0 #000,
+      -6px 6px 0 #000,
+      -7px 7px 0 #000;
+}
+
+/* .row{
+    position: absolute;
+} */
