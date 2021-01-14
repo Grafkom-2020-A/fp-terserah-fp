@@ -190,8 +190,8 @@ function init(data) {
     var scene = new THREE.Scene();
     var mixers = [];
     var mixers2 = [];
-    var mesh,mesh2;
-    var pivot,pivot2;
+    var mesh, mesh2;
+    var pivot, pivot2;
 
     var cloud;
     createPointCloud(3, true, 1, true,
@@ -241,7 +241,7 @@ function init(data) {
             model.traverse((o) => {
                 if (o.isMesh) {
                     if (weather == 'Snow') {
-                        var textureg = new THREE.TextureLoader().load("../particles/g.png");                
+                        var textureg = new THREE.TextureLoader().load("../particles/g.png");
                         // ketutup salju
                         o.material.emissiveMap = textureg;
                         o.material.emissiveIntensity = 0.4;
@@ -268,7 +268,7 @@ function init(data) {
             //20
             // result.scene.scale.set(10, 10, 10);
             result.scene.scale.set(3, 3, 3);
-            result.scene.rotateY(-0.8*Math.PI);
+            result.scene.rotateY(-0.8 * Math.PI);
             result.scene.castShadow = true;
             result.scene.receiveShadow = false;
             scene.add(result.scene);
@@ -308,33 +308,33 @@ function init(data) {
                 mesh = result.scene.children[0];
                 mesh.scale.set(0.025, 0.025, 0.025);
                 mesh.position.set(30, 0, 0);
-    
+
                 mesh.castShadow = true;
                 mesh.receiveShadow = true;
-    
+
                 pivot = new THREE.Group();
                 scene.add(pivot);
                 pivot.add(mesh);
-    
+
                 const mixer = new THREE.AnimationMixer(mesh);
                 mixer.clipAction(result.animations[0]).setDuration(1).play();
                 mixers.push(mixer);
             });
-    
-            
-    
+
+
+
             loader.load('../gLTF/Flamingo.glb', function (result) {
                 mesh2 = result.scene.children[0];
                 mesh2.scale.set(0.025, 0.025, 0.025);
                 mesh2.position.set(-25, -15, 0);
-    
+
                 mesh2.castShadow = true;
                 mesh2.receiveShadow = true;
-    
+
                 pivot2 = new THREE.Group();
                 scene.add(pivot2);
                 pivot2.add(mesh2);
-    
+
                 const mixer = new THREE.AnimationMixer(mesh2);
                 mixer.clipAction(result.animations[0]).setDuration(1).play();
                 mixers2.push(mixer);
@@ -555,7 +555,7 @@ function init(data) {
                 scene.add(result.scene);
             });
 
-            range = 40;
+            var range = 40;
             for (var i = 0; i < 750; i++) {
                 if (i % 5 == 0) {
                     var particle = new THREE.Vector3(
@@ -699,33 +699,33 @@ function init(data) {
                 mesh = result.scene.children[0];
                 mesh.scale.set(0.025, 0.025, 0.025);
                 mesh.position.set(30, 0, 0);
-    
+
                 mesh.castShadow = true;
                 mesh.receiveShadow = true;
-    
+
                 pivot = new THREE.Group();
                 scene.add(pivot);
                 pivot.add(mesh);
-    
+
                 const mixer = new THREE.AnimationMixer(mesh);
                 mixer.clipAction(result.animations[0]).setDuration(1).play();
                 mixers.push(mixer);
             });
-    
-            
-    
+
+
+
             loader.load('../gLTF/Flamingo.glb', function (result) {
                 mesh2 = result.scene.children[0];
                 mesh2.scale.set(0.025, 0.025, 0.025);
                 mesh2.position.set(-25, -15, 0);
-    
+
                 mesh2.castShadow = true;
                 mesh2.receiveShadow = true;
-    
+
                 pivot2 = new THREE.Group();
                 scene.add(pivot2);
                 pivot2.add(mesh2);
-    
+
                 const mixer = new THREE.AnimationMixer(mesh2);
                 mixer.clipAction(result.animations[0]).setDuration(1).play();
                 mixers2.push(mixer);
@@ -785,15 +785,15 @@ function init(data) {
         }
 
         if (mesh) {
-            pivot.rotation.y -= 0.0125/2;
-            pivot2.rotation.y += 0.0125/1.5;
+            pivot.rotation.y -= 0.0125 / 2;
+            pivot2.rotation.y += 0.0125 / 1.5;
         }
 
         requestAnimationFrame(render);
         renderer.render(scene, camera);
-        for ( let i = 0; i < mixers.length; i ++ ) {
-            mixers2[ i ].update( delta );
-            mixers[ i ].update( delta );
+        for (let i = 0; i < mixers.length; i++) {
+            mixers2[i].update(delta);
+            mixers[i].update(delta);
         }
 
     }
