@@ -940,11 +940,9 @@ function init(data) {
             pivot2.rotation.y += 0.0125 / 1.5;
         }
 
-        if (weather == 'Rain' && weather != 'Snow' && weather != 'Drizzle' && weather != 'Thunderstorm'){
             if (mesh3){
                 pivot3.rotation.y -= 0.0125 / 5;
             }
-        }
         
         if (mesh4) {
             if (mesh4.position.x <= -200) mesh4.position.x = 200;

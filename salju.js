@@ -9,6 +9,8 @@ function init() {
     var orbitControls = initOrbitControls(camera, renderer);
     var clock = new THREE.Clock();
     var scene = new THREE.Scene();
+    var mesh3;
+    var pivot3;
 
     var cloud;
     createPointCloud(3, true, 1, true,
@@ -61,14 +63,18 @@ function init() {
 
         loader.load('../gLTF/air.gltf', function (result) {
             // correctly position the scene
-            result.scene.position.set(50, -5, 10);
+            mesh3 = result.scene;
+            mesh3.position.set(50, -5, 10);
             //20
-            // result.scene.scale.set(10, 10, 10);
-            result.scene.scale.set(3, 3, 3);
-            result.scene.rotateY(-0.8 * Math.PI);
-            result.scene.castShadow = true;
-            result.scene.receiveShadow = false;
-            scene.add(result.scene);
+            mesh3.scale.set(3, 3, 3);
+            mesh3.rotateY(-0.8 * Math.PI);
+            mesh3.castShadow = true;
+            mesh3.receiveShadow = false;
+            scene.add(mesh3);
+
+            pivot3 = new THREE.Group();
+            scene.add(pivot3);
+            pivot3.add(mesh3);
         });
 
 
@@ -291,6 +297,10 @@ function init() {
             if (v.x <= -40 || v.x >= 40) v.velocityX = v.velocityX * -1;
         });
         cloud.geometry.verticesNeedUpdate = true;
+
+        if (mesh3){
+            pivot3.rotation.y -= 0.0125 / 5;
+        }
 
         requestAnimationFrame(render);
         renderer.render(scene, camera);
