@@ -262,41 +262,6 @@ function init(data) {
             scene.add(result.scene);
         });
 
-        loader.load('../gLTF/Flamingo.glb', function (result) {
-            mesh = result.scene.children[0];
-            mesh.scale.set(0.025, 0.025, 0.025);
-            mesh.position.set(30, 0, 0);
-
-            mesh.castShadow = true;
-            mesh.receiveShadow = true;
-
-            pivot = new THREE.Group();
-            scene.add(pivot);
-            pivot.add(mesh);
-
-            const mixer = new THREE.AnimationMixer(mesh);
-            mixer.clipAction(result.animations[0]).setDuration(1).play();
-            mixers.push(mixer);
-        });
-
-        loader.load('../gLTF/Flamingo.glb', function (result) {
-            mesh2 = result.scene.children[0];
-            mesh2.scale.set(0.025, 0.025, 0.025);
-            mesh2.position.set(-25, -15, 0);
-
-            mesh2.castShadow = true;
-            mesh2.receiveShadow = true;
-
-            pivot2 = new THREE.Group();
-            scene.add(pivot2);
-            pivot2.add(mesh2);
-
-            const mixer = new THREE.AnimationMixer(mesh2);
-            mixer.clipAction(result.animations[0]).setDuration(1).play();
-            mixers2.push(mixer);
-        });
-
-
 
         // initDefaultLighting(scene);
         var loader1 = new THREE.GLTFLoader();
@@ -326,6 +291,42 @@ function init(data) {
             light4.castShadow = true;
             light4.intensity = 3;
             scene.add(light4);
+
+            loader.load('../gLTF/Flamingo.glb', function (result) {
+                mesh = result.scene.children[0];
+                mesh.scale.set(0.025, 0.025, 0.025);
+                mesh.position.set(30, 0, 0);
+    
+                mesh.castShadow = true;
+                mesh.receiveShadow = true;
+    
+                pivot = new THREE.Group();
+                scene.add(pivot);
+                pivot.add(mesh);
+    
+                const mixer = new THREE.AnimationMixer(mesh);
+                mixer.clipAction(result.animations[0]).setDuration(1).play();
+                mixers.push(mixer);
+            });
+    
+            
+    
+            loader.load('../gLTF/Flamingo.glb', function (result) {
+                mesh2 = result.scene.children[0];
+                mesh2.scale.set(0.025, 0.025, 0.025);
+                mesh2.position.set(-25, -15, 0);
+    
+                mesh2.castShadow = true;
+                mesh2.receiveShadow = true;
+    
+                pivot2 = new THREE.Group();
+                scene.add(pivot2);
+                pivot2.add(mesh2);
+    
+                const mixer = new THREE.AnimationMixer(mesh2);
+                mixer.clipAction(result.animations[0]).setDuration(1).play();
+                mixers2.push(mixer);
+            });
 
             loader1.load('../gLTF/sun.gltf', function (result) {
                 // correctly position the scene
@@ -682,14 +683,42 @@ function init(data) {
             light4.intensity = 8;
             scene.add(light4);
 
-            // loader1.load('../gLTF/new/scene.gltf', function (result) {
-            //     // correctly position the scene
-            //     result.scene.position.set(-5, 35, 0);
-            //     //20
-            //     // result.scene.scale.set(10, 10, 10);
-            //     result.scene.scale.set(4, 4, 4);
-            //     scene.add(result.scene);
-            // });
+            loader.load('../gLTF/Flamingo.glb', function (result) {
+                mesh = result.scene.children[0];
+                mesh.scale.set(0.025, 0.025, 0.025);
+                mesh.position.set(30, 0, 0);
+    
+                mesh.castShadow = true;
+                mesh.receiveShadow = true;
+    
+                pivot = new THREE.Group();
+                scene.add(pivot);
+                pivot.add(mesh);
+    
+                const mixer = new THREE.AnimationMixer(mesh);
+                mixer.clipAction(result.animations[0]).setDuration(1).play();
+                mixers.push(mixer);
+            });
+    
+            
+    
+            loader.load('../gLTF/Flamingo.glb', function (result) {
+                mesh2 = result.scene.children[0];
+                mesh2.scale.set(0.025, 0.025, 0.025);
+                mesh2.position.set(-25, -15, 0);
+    
+                mesh2.castShadow = true;
+                mesh2.receiveShadow = true;
+    
+                pivot2 = new THREE.Group();
+                scene.add(pivot2);
+                pivot2.add(mesh2);
+    
+                const mixer = new THREE.AnimationMixer(mesh2);
+                mixer.clipAction(result.animations[0]).setDuration(1).play();
+                mixers2.push(mixer);
+            });
+
             loader1.load('../gLTF/sun.gltf', function (result) {
                 // correctly position the scene
                 result.scene.position.set(-5, 35, 0);
@@ -745,7 +774,7 @@ function init(data) {
 
         if (mesh) {
             pivot.rotation.y -= 0.0125/2;
-            pivot2.rotation.y += 0.0125;
+            pivot2.rotation.y += 0.0125/1.5;
         }
 
         requestAnimationFrame(render);
