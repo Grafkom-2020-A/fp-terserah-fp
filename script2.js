@@ -149,6 +149,8 @@ function init(data) {
         var hours = today.toLocaleTimeString();
         today = dd + '/' + mm + '/' + yyyy + ' ' + hours;
         date = today.toLocaleString();
+        var x = hours.split(':'); 
+        var hours_only = parseInt(x[0]);
     }
 
 
@@ -350,15 +352,34 @@ function init(data) {
                 mixer.clipAction(result.animations[0]).setDuration(1).play();
                 mixers2.push(mixer);
             });
-
-            loader1.load('../gLTF/new/scene.gltf', function (result) {
+             if (hours_only>5 && hours_only<18) {
+                //matahari
+                loader1.load('../gLTF/new/scene.gltf', function (result) {
                 // correctly position the scene
                 result.scene.position.set(-5, 35, 0);
                 //20
                 // result.scene.scale.set(10, 10, 10);
-                result.scene.scale.set(4, 4, 4);
+                result.scene.scale.set(4, 6, 4);
                 scene.add(result.scene);
-            });
+                });
+            } else {
+                loader1.load('../gLTF/moon/scene.gltf', function (result) {
+                // correctly position the scene
+                result.scene.position.set(-5, 35, 0);
+                //20
+                // result.scene.scale.set(10, 10, 10);
+                result.scene.scale.set(4, 6, 4);
+                scene.add(result.scene);
+                });
+            }
+            // loader1.load('../gLTF/new/scene.gltf', function (result) {
+            //     // correctly position the scene
+            //     result.scene.position.set(-5, 35, 0);
+            //     //20
+            //     // result.scene.scale.set(10, 10, 10);
+            //     result.scene.scale.set(4, 4, 4);
+            //     scene.add(result.scene);
+            // });
 
             loader1.load('../gLTF/clouds.gltf', function (result) {
                 // correctly position the scene
@@ -755,14 +776,26 @@ function init(data) {
                 mixers2.push(mixer);
             });
 
-            loader1.load('../gLTF/new/scene.gltf', function (result) {
+            if (hours_only>5 && hours_only<18) {
+                //matahari
+                loader1.load('../gLTF/new/scene.gltf', function (result) {
                 // correctly position the scene
                 result.scene.position.set(-5, 35, 0);
                 //20
                 // result.scene.scale.set(10, 10, 10);
-                result.scene.scale.set(4, 4, 4);
+                result.scene.scale.set(4, 6, 4);
                 scene.add(result.scene);
-            });
+                });
+            } else {
+                loader1.load('../gLTF/moon/scene.gltf', function (result) {
+                // correctly position the scene
+                result.scene.position.set(-5, 35, 0);
+                //20
+                // result.scene.scale.set(10, 10, 10);
+                result.scene.scale.set(4, 6, 4);
+                scene.add(result.scene);
+                });
+            }
         }
 
         // var helper = new THREE.PointLightHelper(pointLight);
