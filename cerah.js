@@ -11,8 +11,8 @@ function init() {
     var scene = new THREE.Scene();
     var mixers = [];
     var mixers2 = [];
-    var mesh, mesh2;
-    var pivot, pivot2;
+    var mesh, mesh2, mesh3, mesh4;
+    var pivot, pivot2, pivot3;
 
     createPointCloud();
     render();
@@ -35,14 +35,31 @@ function init() {
 
         loader.load('../gLTF/air.gltf', function (result) {
             // correctly position the scene
-            result.scene.position.set(50, -5, 10);
+            mesh3 = result.scene;
+            mesh3.position.set(50, -5, 10);
+            //20
+            mesh3.scale.set(3, 3, 3);
+            mesh3.rotateY(-0.8 * Math.PI);
+            mesh3.castShadow = true;
+            mesh3.receiveShadow = false;
+            scene.add(mesh3);
+
+            pivot3 = new THREE.Group();
+            scene.add(pivot3);
+            pivot3.add(mesh3);
+        });
+
+        loader.load('../gLTF/air2.glb', function (result) {
+            // correctly position the scene
+            mesh4 = result.scene;
+            mesh4.position.set(200, 18, 0);
             //20
             // result.scene.scale.set(10, 10, 10);
-            result.scene.scale.set(3, 3, 3);
-            result.scene.rotateY(-0.8 * Math.PI);
-            result.scene.castShadow = true;
-            result.scene.receiveShadow = false;
-            scene.add(result.scene);
+            mesh4.scale.set(0.25, 0.25, 0.25);
+            mesh4.rotateY(0.5 * Math.PI);
+            mesh4.castShadow = true;
+            mesh4.receiveShadow = true;
+            scene.add(mesh4);
         });
 
 
@@ -131,6 +148,15 @@ function init() {
         if (mesh) {
             pivot.rotation.y -= 0.0125 / 2;
             pivot2.rotation.y += 0.0125 / 1.5;
+        }
+
+        if (mesh3){
+            pivot3.rotation.y -= 0.0125 / 5;
+        }
+
+        if (mesh4) {
+            if (mesh4.position.x <= -200) mesh4.position.x = 200;
+            mesh4.position.x -= 0.5;
         }
 
         requestAnimationFrame(render);
