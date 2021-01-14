@@ -11,7 +11,7 @@ var forecastURL = 'http://api.openweathermap.org/data/2.5/forecast?q='; //+city
 let appid = '&units=metric&appid=36369af9d5acd7def902ad1bc5f5c968';
 let userInput;
 let url;
-let iterator= -1;
+let iterator = -1;
 
 function setup() {
     userInput = select('#userInput');
@@ -38,7 +38,7 @@ function searchbycity() {
     // loadJSON(url, init, 'json');
     console.log(url);
 
-    
+
 
 }
 
@@ -57,7 +57,7 @@ function forecastWeatherNext() {
 }
 
 function forecastWeatherBefore() {
-    
+
     if (iterator > 0) {
         userInput = select('#userInput');
         let term = userInput.value();
@@ -69,9 +69,7 @@ function forecastWeatherBefore() {
         // loadJSON(url, init, 'json');
         console.log(url);
         iterator -= 1;
-    }
-
-    else {
+    } else {
         searchbycity();
     }
 
@@ -129,7 +127,7 @@ function init(data) {
         weather = data.list[iterator].weather[0].main;
         city = data.city.name;
         date = data.list[iterator].dt_txt;
-        
+
     } else {
 
         //Assign Data dari Current weather API ke variable
@@ -162,10 +160,10 @@ function init(data) {
 
 
     // Append data ke HTML Element (Stat Weather Atas)
-    $('.Temp').append("Suhu: " + temp + "°C");
+    $('.Temp').append(temp + "°C");
     $('.Feels_like').append("Terasa Seperti: " + feels_like + "°C");
-    $('.Temp_min').append("Suhu Minimum: " + temp_min + "°C");
-    $('.Temp_max').append("Suhu Maksimum: " + temp_max + "°C");
+    $('.Temp_min').append("Min: " + temp_min + "°C");
+    $('.Temp_max').append("Maks: " + temp_max + "°C");
     $('.City').append(city);
     $('.Date').append(date);
 
@@ -217,7 +215,7 @@ function init(data) {
             sizeAttenuation: sizeAttenuation,
             color: color
         });
-        
+
 
         var material2 = new THREE.PointsMaterial({
             size: size + 2,
@@ -231,16 +229,16 @@ function init(data) {
 
         var ambientLight = new THREE.AmbientLight("#ffffff");
         scene.add(ambientLight);
-      
-      
+
+
         var loader = new THREE.GLTFLoader();
         loader.load('../gLTF/scene.gltf', function(result) {
             // correctly position the scene
             result.scene.position.set(0, -50, 0);
             result.scene.scale.set(0.05, 0.05, 0.05);
             var model = result.scene;
-                model.traverse ( ( o ) => {
-                  if ( o.isMesh ) {
+            model.traverse((o) => {
+                if (o.isMesh) {
                     // ketutup salju
                     o.material.emissiveMap = textureg;
                     o.material.emissiveIntensity = 0.4;
@@ -249,8 +247,8 @@ function init(data) {
                     // o.material.emissiveIntensity = 0.2;
                     // o.material.roughness = 0.4;
                     // o.material.metalness = 1;
-                  }
-                } );
+                }
+            });
             scene.add(result.scene);
         });
 
@@ -297,7 +295,7 @@ function init(data) {
                 result.scene.scale.set(4, 4, 4);
                 scene.add(result.scene);
             });
-        } else if (weather == 'Rain' || weather == 'Drizzle' || weather == 'Thunderstorm' ) {
+        } else if (weather == 'Rain' || weather == 'Drizzle' || weather == 'Thunderstorm') {
             $('.Weather').append("Hujan");
             light2 = new THREE.PointLight(0xc4c4c4, 10);
             light2.position.set(500, 100, 0);
@@ -373,8 +371,7 @@ function init(data) {
 
             var range = 40;
             for (var i = 0; i < 750; i++) {
-                var particle = new THREE.Vector3(
-                    -17 + Math.random() * range - range / 2,
+                var particle = new THREE.Vector3(-17 + Math.random() * range - range / 2,
                     0.3 * range * 1.5,
                     // Math.random() * range - range / 2
                     -6 + (i / 100)
@@ -389,8 +386,7 @@ function init(data) {
 
             var range = 40;
             for (var i = 0; i < 750; i++) {
-                var particle = new THREE.Vector3(
-                    -10 + Math.random() * range - range / 2,
+                var particle = new THREE.Vector3(-10 + Math.random() * range - range / 2,
                     0.3 * range * 1.5,
                     // Math.random() * range - range / 2
                     -13 + (i / 100)
@@ -440,7 +436,7 @@ function init(data) {
 
             scene.add(cloud);
 
-        } else if (weather == 'Snow'){
+        } else if (weather == 'Snow') {
             $('.Weather').append("Salju");
             light2 = new THREE.PointLight(0xc4c4c4, 10);
             light2.position.set(500, 100, 0);
@@ -484,7 +480,7 @@ function init(data) {
 
             var range = 40;
             for (var i = 0; i < 750; i++) {
-                if(i%5==0){
+                if (i % 5 == 0) {
                     var particle = new THREE.Vector3(
                         Math.random() * range - range / 2,
                         0.3 * range * 1.5,
@@ -502,7 +498,7 @@ function init(data) {
 
             var range = 40;
             for (var i = 0; i < 750; i++) {
-                if(i%5==0){
+                if (i % 5 == 0) {
                     var particle = new THREE.Vector3(
                         7 + Math.random() * range - range / 2,
                         0.3 * range * 1.5,
@@ -520,9 +516,8 @@ function init(data) {
 
             var range = 40;
             for (var i = 0; i < 750; i++) {
-                if(i%5==0){
-                    var particle = new THREE.Vector3(
-                        -17 + Math.random() * range - range / 2,
+                if (i % 5 == 0) {
+                    var particle = new THREE.Vector3(-17 + Math.random() * range - range / 2,
                         0.3 * range * 1.5,
                         // Math.random() * range - range / 2
                         -6 + (i / 100)
@@ -538,10 +533,9 @@ function init(data) {
 
             var range = 40;
             for (var i = 0; i < 750; i++) {
-                if(i%5==0){
-                    
-                    var particle = new THREE.Vector3(
-                        -10 + Math.random() * range - range / 2,
+                if (i % 5 == 0) {
+
+                    var particle = new THREE.Vector3(-10 + Math.random() * range - range / 2,
                         0.3 * range * 1.5,
                         // Math.random() * range - range / 2
                         -13 + (i / 100)
@@ -557,7 +551,7 @@ function init(data) {
 
             var range = 40;
             for (var i = 0; i < 750; i++) {
-                if(i%5==0){
+                if (i % 5 == 0) {
                     var particle = new THREE.Vector3(
                         21 + Math.random() * range - range / 2,
                         0.3 * range * 1.5,
@@ -575,7 +569,7 @@ function init(data) {
 
             var range = 40;
             for (var i = 0; i < 750; i++) {
-                if(i%5==0){
+                if (i % 5 == 0) {
                     var particle = new THREE.Vector3(
                         28 + Math.random() * range - range / 2,
                         0.3 * range * 1.5,
@@ -603,9 +597,9 @@ function init(data) {
             pointLight.position.set(-5, 35, 0);
             pointLight.intensity = 5;
             pointLight.decay = 2;
-          
+
             pointLight.castShadow = true;
-          
+
             scene.add(pointLight);
 
             light2 = new THREE.PointLight(0xc4c4c4, 10);
@@ -636,25 +630,25 @@ function init(data) {
 
         // var helper = new THREE.PointLightHelper(pointLight);
         // scene.add(helper);
-      
+
         // var shadowHelper = new THREE.CameraHelper(pointLight.shadow.camera)
         // scene.add(shadowHelper);
 
         // var helper = new THREE.PointLightHelper(light4);
         // scene.add(helper);
-      
+
         // var shadowHelper = new THREE.CameraHelper(light4.shadow.camera)
         // scene.add(shadowHelper);
 
         // var helper = new THREE.PointLightHelper(light2);
         // scene.add(helper);
-      
+
         // var shadowHelper = new THREE.CameraHelper(light2.shadow.camera)
         // scene.add(shadowHelper);
 
         // var helper = new THREE.PointLightHelper(light3);
         // scene.add(helper);
-      
+
         // var shadowHelper = new THREE.CameraHelper(light3.shadow.camera)
         // scene.add(shadowHelper);
     }
@@ -664,7 +658,7 @@ function init(data) {
         // stats.update();
         orbitControls.update(clock.getDelta());
         // trackballControls.update(clock.getDelta());
-        if(weather == 'Rain' || weather == 'Snow' ){
+        if (weather == 'Rain' || weather == 'Snow') {
             var vertices = cloud.geometry.vertices;
             vertices.forEach(function(v) {
                 v.y = v.y - (v.velocityY);
