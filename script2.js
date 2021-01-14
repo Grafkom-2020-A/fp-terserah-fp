@@ -262,6 +262,18 @@ function init(data) {
             scene.add(result.scene);
         });
 
+        loader.load('../gLTF/air.gltf', function (result) {
+            // correctly position the scene
+            result.scene.position.set(50, -5, 10);
+            //20
+            // result.scene.scale.set(10, 10, 10);
+            result.scene.scale.set(3, 3, 3);
+            result.scene.rotateY(-0.8*Math.PI);
+            result.scene.castShadow = true;
+            result.scene.receiveShadow = false;
+            scene.add(result.scene);
+        });
+
 
         // initDefaultLighting(scene);
         var loader1 = new THREE.GLTFLoader();
