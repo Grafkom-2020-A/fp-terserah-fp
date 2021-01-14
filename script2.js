@@ -13,6 +13,11 @@ let userInput;
 let url;
 let iterator = -1;
 
+var scene;
+var renderer;
+var mesh, mesh2, mesh3, mesh4;
+var pivot, pivot2, pivot3;
+
 function setup() {
     userInput = select('#userInput');
     searchbutton = select('#searchButton');
@@ -37,12 +42,85 @@ function searchbycity() {
     loadJSON(url, init, 'json');
     // loadJSON(url, init, 'json');
     console.log(url);
+}
 
+function disposeNode (node)
+{
+    if (node instanceof THREE.Mesh)
+    {
+        if (node.geometry)
+        {
+            node.geometry.dispose ();
+        }
 
+        if (node.material)
+        {
+            if (node.material instanceof THREE.MeshFaceMaterial)
+            {
+                $.each (node.material.materials, function (idx, mtrl)
+                {
+                    if (mtrl.map)               mtrl.map.dispose ();
+                    if (mtrl.lightMap)          mtrl.lightMap.dispose ();
+                    if (mtrl.bumpMap)           mtrl.bumpMap.dispose ();
+                    if (mtrl.normalMap)         mtrl.normalMap.dispose ();
+                    if (mtrl.specularMap)       mtrl.specularMap.dispose ();
+                    if (mtrl.envMap)            mtrl.envMap.dispose ();
+                    if (mtrl.alphaMap)          mtrl.alphaMap.dispose();
+                    if (mtrl.aoMap)             mtrl.aoMap.dispose();
+                    if (mtrl.displacementMap)   mtrl.displacementMap.dispose();
+                    if (mtrl.emissiveMap)       mtrl.emissiveMap.dispose();
+                    if (mtrl.gradientMap)       mtrl.gradientMap.dispose();
+                    if (mtrl.metalnessMap)      mtrl.metalnessMap.dispose();
+                    if (mtrl.roughnessMap)      mtrl.roughnessMap.dispose();
 
+                    mtrl.dispose ();    // disposes any programs associated with the material
+                });
+            }
+            else
+            {
+                if (node.material.map)              node.material.map.dispose ();
+                if (node.material.lightMap)         node.material.lightMap.dispose ();
+                if (node.material.bumpMap)          node.material.bumpMap.dispose ();
+                if (node.material.normalMap)        node.material.normalMap.dispose ();
+                if (node.material.specularMap)      node.material.specularMap.dispose ();
+                if (node.material.envMap)           node.material.envMap.dispose ();
+                if (node.material.alphaMap)         node.material.alphaMap.dispose();
+                if (node.material.aoMap)            node.material.aoMap.dispose();
+                if (node.material.displacementMap)  node.material.displacementMap.dispose();
+                if (node.material.emissiveMap)      node.material.emissiveMap.dispose();
+                if (node.material.gradientMap)      node.material.gradientMap.dispose();
+                if (node.material.metalnessMap)     node.material.metalnessMap.dispose();
+                if (node.material.roughnessMap)     node.material.roughnessMap.dispose();
+
+                node.material.dispose ();   // disposes any programs associated with the material
+            }
+        }
+    }
+}
+
+function disposeHierarchy (node, callback)
+{
+    for (var i = node.children.length - 1; i >= 0; i--)
+    {
+        var child = node.children[i];
+        disposeHierarchy (child, callback);
+        callback (child);
+    }
 }
 
 function forecastWeatherNext() {
+    disposeHierarchy (mesh4, disposeNode);
+    disposeHierarchy (mesh3, disposeNode);
+    disposeHierarchy (mesh2, disposeNode);
+    disposeHierarchy (mesh, disposeNode);
+    disposeHierarchy (pivot3, disposeNode);
+    disposeHierarchy (pivot2, disposeNode);
+    disposeHierarchy (pivot, disposeNode);
+    disposeHierarchy (scene, disposeNode);
+    renderer.dispose();
+    renderer.forceContextLoss(); 
+    renderer.context=undefined;
+    renderer.domElement=undefined;
     userInput = select('#userInput');
     let term = userInput.value();
     var id = appid;
@@ -57,8 +135,19 @@ function forecastWeatherNext() {
 }
 
 function forecastWeatherBefore() {
-
     if (iterator > 0) {
+        disposeHierarchy (mesh4, disposeNode);
+        disposeHierarchy (mesh3, disposeNode);
+        disposeHierarchy (mesh2, disposeNode);
+        disposeHierarchy (mesh, disposeNode);
+        disposeHierarchy (pivot3, disposeNode);
+        disposeHierarchy (pivot2, disposeNode);
+        disposeHierarchy (pivot, disposeNode);
+        disposeHierarchy (scene, disposeNode);
+        renderer.dispose();
+        renderer.forceContextLoss(); 
+        renderer.context=undefined;
+        renderer.domElement=undefined;
         userInput = select('#userInput');
         let term = userInput.value();
         var id = appid;
@@ -189,18 +278,23 @@ function init(data) {
 
 
     // var stats = initStats();
-    var renderer = initRenderer();
+    renderer = initRenderer();
     renderer.physicallyCorrectLights = true;
     // renderer.gammaOutput = true;
     // renderer.gammaFactor = 2.2;
     var camera = initCamera(new THREE.Vector3(0, 0, 100));
     var orbitControls = initOrbitControls(camera, renderer);
     var clock = new THREE.Clock();
-    var scene = new THREE.Scene();
+    scene = new THREE.Scene();
     var mixers = [];
     var mixers2 = [];
-    var mesh, mesh2, mesh3, mesh4;
-    var pivot, pivot2, pivot3;
+    mesh = new THREE.Mesh();
+    mesh2 = new THREE.Mesh();
+    mesh3 = new THREE.Mesh();
+    mesh4 = new THREE.Mesh();
+    pivot = new THREE.Object3D();
+    pivot2 = new THREE.Object3D();
+    pivot3 = new THREE.Object3D();
 
     var cloud;
     createPointCloud(3, true, 1, true,
